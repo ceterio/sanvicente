@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datuen Babesa | Protección de Datos - San Vicente de Paúl</title>
+    
+    <!-- FUENTES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- ESTILOS (Tailwind) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'sv-primary': '#006D7B',      // Verde azulado oscuro
+                        'sv-accent-1': '#5FB3C5',     // Azul claro
+                        'sv-accent-2': '#95C11F',     // Verde lima
+                        'sv-accent-3': '#FDC300',     // Amarillo
+                        'sv-cta': '#F3953F',          // Naranja
+                        'sv-light': '#F9FAFB',        // Gris muy claro fondo
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { -webkit-font-smoothing: antialiased; }
+        /* Estilos para listas legales */
+        .legal-list { list-style-type: disc; padding-left: 1.5rem; margin-top: 0.5rem; margin-bottom: 0.5rem; }
+        .legal-list li { margin-bottom: 0.25rem; }
+    </style>
+</head>
+<body class="bg-white text-gray-800 flex flex-col min-h-screen font-sans">
+
+    <!-- 1. HERO SECTION -->
+    <header class="relative bg-sv-primary h-64 flex items-center justify-center overflow-hidden shadow-md">
+        <!-- Imagen de fondo -->
+        <div class="absolute inset-0 opacity-20">
+            <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="Protección de Datos" class="w-full h-full object-cover">
+        </div>
+        
+        <!-- Capas de contraste -->
+        <div class="absolute inset-0 bg-sv-primary/60 mix-blend-multiply"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-sv-primary/90 via-transparent to-transparent"></div>
+
+        <!-- Contenido -->
+        <div class="relative z-10 text-center px-4">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-2 drop-shadow-lg tracking-tight">Datuen Babesa</h1>
+            <div class="w-24 h-1 bg-sv-accent-2 mx-auto my-3 rounded-full shadow-sm"></div>
+            <p class="text-white text-xl md:text-2xl font-medium tracking-wide opacity-95 drop-shadow-md">Protección de Datos</p>
+        </div>
+    </header>
+
+    <!-- 2. CONTENIDO PRINCIPAL -->
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-16 mb-10">
+
+        <!-- INTRO -->
+        <div class="text-center max-w-3xl mx-auto">
+            <p class="text-lg text-gray-600">
+                Informazio honen bidez, San Vicente de Paul Ikastetxeak datu pertsonalen tratamenduari buruzko gardentasuna bermatzen du.
+                <br>
+                <span class="text-sm font-light italic">A través de esta información, el Colegio San Vicente de Paúl garantiza la transparencia sobre el tratamiento de datos personales.</span>
+            </p>
+        </div>
+
+        <!-- SECCIÓN 1: Formulario de Contacto (1ª Capa) -->
+        <section class="bg-white p-8 rounded-xl shadow-lg border-t-4 border-sv-primary">
+            <h2 class="text-2xl font-bold text-sv-primary mb-6 flex items-center gap-2">
+                <span class="bg-sv-primary/10 p-2 rounded-full"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span>
+                1. Webguneko Harremanetarako Formularioa
+                <span class="text-sm font-normal text-gray-500 ml-2 hidden sm:inline">/ Formulario de contacto web</span>
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Euskera -->
+                <div class="bg-sv-light p-6 rounded-lg border border-gray-100">
+                    <h3 class="font-bold text-gray-800 mb-4 uppercase tracking-wide border-b border-gray-200 pb-2">Euskara</h3>
+                    <ul class="space-y-3 text-sm text-gray-700">
+                        <li><strong>Tratamenduaren arduraduna:</strong> San Vicente de Paul Ikastetxea</li>
+                        <li><strong>Helburua:</strong> kontsultak eta informazio-eskaerak kudeatzea.</li>
+                        <li><strong>Legitimazioa:</strong> tratamenduaren arduradunak lortu nahi dituen interes legitimoak betetzea, harremanetarako pertsonen datuen tratamenduari dagokionez.</li>
+                        <li><strong>Hartzaileak:</strong> datuak ez zaizkie hirugarrenei lagako, legezko betebeharra izan ezik.</li>
+                        <li><strong>Eskubideak:</strong> datuak eskuratu, zuzendu eta ezabatu ditzake, bai eta beste eskubide batzuk baliatu eta pribatutasun-politikan datuak babesteko informazio gehigarria kontsultatu ere.</li>
+                    </ul>
+                    <div class="mt-4 flex items-start gap-2">
+                        <input type="checkbox" class="mt-1 h-4 w-4 text-sv-primary rounded border-gray-300" disabled checked>
+                        <span class="text-xs text-gray-600">Pribatutasun-politika irakurri eta onartu dut.</span>
+                    </div>
+                </div>
+
+                <!-- Castellano -->
+                <div class="bg-white p-6 rounded-lg border border-gray-200">
+                    <h3 class="font-bold text-gray-800 mb-4 uppercase tracking-wide border-b border-gray-200 pb-2">Castellano</h3>
+                    <ul class="space-y-3 text-sm text-gray-700">
+                        <li><strong>Responsable del tratamiento:</strong> COLEGIO SAN VICENTE DE PAUL IKASTETXEA</li>
+                        <li><strong>Finalidad:</strong> gestión de consultas y solicitudes de información.</li>
+                        <li><strong>Legitimación:</strong> La satisfacción de intereses legítimos perseguidos por el responsable del tratamiento en lo que respecta al tratamiento de los datos de las personas de contacto.</li>
+                        <li><strong>Destinatarios:</strong> Los datos no se cederán a terceros, salvo obligación legal.</li>
+                        <li><strong>Derechos:</strong> puede acceder, rectificar y suprimir los datos, así como ejercer otros derechos y consultar información adicional de protección de datos en la política de privacidad.</li>
+                    </ul>
+                    <div class="mt-4 flex items-start gap-2">
+                        <input type="checkbox" class="mt-1 h-4 w-4 text-sv-primary rounded border-gray-300" disabled checked>
+                        <span class="text-xs text-gray-600">He leído y acepto la política de privacidad.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: Política de Privacidad (2ª Capa) -->
+        <section class="bg-white p-8 rounded-xl shadow-lg border-t-4 border-sv-accent-1">
+            <h2 class="text-2xl font-bold text-sv-primary mb-6 flex items-center gap-2">
+                <span class="bg-sv-accent-1/10 p-2 rounded-full text-sv-accent-1"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg></span>
+                2. Pribatutasun Politika (2. Geruza)
+                <span class="text-sm font-normal text-gray-500 ml-2 hidden sm:inline">/ Política de Privacidad (2ª Capa)</span>
+            </h2>
+
+            <!-- CONTENEDOR TABS (Simulado para mostrar ambos idiomas claramente) -->
+            <div class="space-y-8">
+                
+                <!-- BLOQUE EUSKERA -->
+                <div class="bg-sv-light p-6 rounded-xl border border-gray-200">
+                    <h3 class="text-xl font-bold text-sv-primary mb-4 border-b border-gray-300 pb-2">EUSKARA</h3>
+                    
+                    <div class="space-y-6 text-sm text-gray-700 leading-relaxed">
+                        <p>Datu pertsonalen tratamenduari eta datu horien zirkulazio askeari dagokienez pertsona fisikoak babesteari buruzko 2016/679 (EB) Erregelamenduaren 13. artikuluan eta Datu Pertsonalak Babesteari eta Eskubide digitalak Bermatzeari buruzko 3/2018 Lege Organikoaren 11. artikuluan xedatutakoarekin bat etorriz, San Vicente de Paul Ikastetxeak honako informazio hau ematen du tratamenduari buruz.</p>
+
+                        <div>
+                            <h4 class="font-bold text-gray-900">Nor da zure datu pertsonalen tratamenduaren arduraduna?</h4>
+                            <ul class="list-disc list-inside ml-2 mt-1">
+                                <li><strong>Identitatea:</strong> San Vicente de Paul Ikastetxea</li>
+                                <li><strong>IFK:</strong> R-2000115-B</li>
+                                <li><strong>Posta-helbidea:</strong> Hondarribia kalea 23; 20301 Irun - Gipuzkoa</li>
+                                <li><strong>Telefonoa:</strong> 943619990</li>
+                                <li><strong>Posta elektronikoa:</strong> <a href="mailto:svptitular@sanvicenteirun.com" class="text-sv-primary hover:underline">svptitular@sanvicenteirun.com</a></li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h4 class="font-bold text-gray-900">Zein helbururekin tratatzen ditugu zure datu pertsonalak?</h4>
+                            <ul class="legal-list">
+                                <li>Jasotako kontsultak eta informazio-eskaerak kudeatzea eta erantzutea.</li>
+                                <li>Kexen eta erreklamazioen kudeaketa eta arreta.</li>
+                                <li>Curriculumak eta lan-poltsa kudeatzea.</li>
+                                <li>Gure jarduerei buruzko dibulgazio-helburuekin.</li>
+                                <li>Gure kontratu-harremanaren edo kontratu-aurreko harremanaren kontabilitatea, zerga eta administrazioa kudeatzeko.</li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h4 class="font-bold text-gray-900">Zenbat denboraz gordeko ditugu zure datu pertsonalak?</h4>
+                            <p>Emandako datu pertsonalak behar adina denbora gordeko dira bildu ziren helburua betetzeko eta helburu horretatik eta datuen tratamendutik erator daitezkeen erantzukizunak zehazteko.</p>
+                        </div>
+
+                        <div>
+                            <h4 class="font-bold text-gray-900">Zeintzuk dira zure eskubideak?</h4>
+                            <p>Gure posta-helbidera idatziz edo <a href="mailto:svptitular@sanvicenteirun.com" class="text-sv-primary hover:underline">svptitular@sanvicenteirun.com</a> helbide elektronikoaren bidez:</p>
+                            <ul class="legal-list">
+                                <li>Datuak eskuratzeko eskubidea.</li>
+                                <li>Datuak zuzentzeko eskubidea.</li>
+                                <li>Ezabatzeko eskubidea.</li>
+                                <li>Aurka egiteko eskubidea.</li>
+                                <li>Tratamendua mugatzeko eskubidea.</li>
+                                <li>Datuak eramateko eskubidea.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BLOQUE CASTELLANO -->
+                <div class="bg-white p-6 rounded-xl border border-gray-200">
+                    <h3 class="text-xl font-bold text-sv-primary mb-4 border-b border-gray-300 pb-2">CASTELLANO</h3>
+                    
+                    <div class="space-y-6 text-sm text-gray-700 leading-relaxed">
+                        <p>De conformidad con lo dispuesto en el artículo 13 del Reglamento (UE) 2016/679 (RGPD) y el artículo 11 de la Ley Orgánica 3/2018, el Colegio SAN VICENTE DE PAUL IKASTETXEA facilita la siguiente información:</p>
+
+                        <div>
+                            <h4 class="font-bold text-gray-900">¿Quién es el Responsable del tratamiento?</h4>
+                            <ul class="list-disc list-inside ml-2 mt-1">
+                                <li><strong>Identidad:</strong> SAN VICENTE DE PAUL IKASTETXEA</li>
+                                <li><strong>CIF:</strong> R-2000115-B</li>
+                                <li><strong>Dirección:</strong> Hondarribia kalea, 23; 20301 Irun - Gipuzkoa</li>
+                                <li><strong>Teléfono:</strong> 943619990</li>
+                                <li><strong>Email:</strong> <a href="mailto:svptitular@sanvicenteirun.com" class="text-sv-primary hover:underline">svptitular@sanvicenteirun.com</a></li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h4 class="font-bold text-gray-900">¿Con qué finalidad tratamos sus datos?</h4>
+                            <ul class="legal-list">
+                                <li>Gestión y atención de consultas y solicitudes.</li>
+                                <li>Gestión de quejas y reclamaciones.</li>
+                                <li>Gestión de currículos y bolsa de trabajo.</li>
+                                <li>Fines divulgativos sobre nuestras actividades.</li>
+                                <li>Gestión contable, fiscal y administrativa.</li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h4 class="font-bold text-gray-900">¿Por cuánto tiempo conservaremos sus datos?</h4>
+                            <p>Se conservarán el tiempo necesario para cumplir con la finalidad para la que se recabaron y determinar posibles responsabilidades derivadas.</p>
+                        </div>
+
+                        <div>
+                            <h4 class="font-bold text-gray-900">¿Cuáles son sus derechos?</h4>
+                            <p>Mediante escrito a nuestra dirección postal o a <a href="mailto:svptitular@sanvicenteirun.com" class="text-sv-primary hover:underline">svptitular@sanvicenteirun.com</a>:</p>
+                            <ul class="legal-list">
+                                <li>Derecho de acceso, rectificación y supresión.</li>
+                                <li>Derecho de oposición.</li>
+                                <li>Derecho a la limitación del tratamiento.</li>
+                                <li>Derecho a la portabilidad.</li>
+                                <li>Derecho a revocar el consentimiento.</li>
+                            </ul>
+                            <p class="mt-2 text-xs text-gray-500">Tiene derecho a presentar una reclamación ante la Agencia Española de Protección de Datos (www.agpd.es) si no ha obtenido satisfacción en el ejercicio de sus derechos.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: Cláusula Informativa (Resumen) -->
+        <section class="bg-gray-50 p-8 rounded-xl border border-gray-200">
+            <h2 class="text-xl font-bold text-gray-800 mb-4">Informazio-klausula / Cláusula Informativa</h2>
+            <div class="grid md:grid-cols-2 gap-8 text-sm text-gray-600">
+                <div>
+                    <p class="mb-2"><strong>EU:</strong> SAN VICENTE DE PAUL Ikastetxeak tratamendu-arduradun gisa tratatuko ditu emandako datu pertsonalak, kontaktuak eta jasotako kexak eta iradokizunak kudeatzeko. Zure datuak eskuratu, zuzendu eta ezabatu ditzakezu, bai eta beste eskubide batzuk ere, <a href="mailto:svptitular@sanvicenteirun.com" class="text-sv-primary hover:underline">svptitular@sanvicenteirun.com</a> helbidean.</p>
+                    <div class="flex items-center gap-2 mt-2">
+                        <input type="checkbox" disabled checked class="text-sv-primary rounded">
+                        <span class="text-xs">Pribatutasun-politika irakurri eta onartzen dut.</span>
+                    </div>
+                </div>
+                <div>
+                    <p class="mb-2"><strong>ES:</strong> Los datos personales facilitados serán tratados por el Colegio SAN VICENTE DE PAUL IKASTETXEA como responsable del tratamiento, para la gestión de contactos, quejas y sugerencias. Puede acceder, rectificar y suprimir sus datos y ejercer otros derechos en <a href="mailto:svptitular@sanvicenteirun.com" class="text-sv-primary hover:underline">svptitular@sanvicenteirun.com</a>.</p>
+                    <div class="flex items-center gap-2 mt-2">
+                        <input type="checkbox" disabled checked class="text-sv-primary rounded">
+                        <span class="text-xs">He leído y acepto la política de privacidad.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- (Sin Footer ni Nav) -->
+
+</body>
+</html>

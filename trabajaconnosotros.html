@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lan egin gurekin | Trabaja con nosotros - San Vicente de Paúl</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'sv-primary': '#006D7B',      // Verde azulado oscuro
+                        'sv-accent-1': '#5FB3C5',     // Azul claro
+                        'sv-accent-2': '#95C11F',     // Verde lima
+                        'sv-accent-3': '#FDC300',     // Amarillo
+                        'sv-cta': '#F3953F',          // Naranja
+                        'sv-light': '#F9FAFB',        // Gris muy claro fondo
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { -webkit-font-smoothing: antialiased; }
+    </style>
+</head>
+<body class="bg-white text-gray-800 flex flex-col min-h-screen font-sans">
+
+    <header class="relative bg-sv-primary h-64 flex items-center justify-center overflow-hidden shadow-md">
+        <div class="absolute inset-0 opacity-30">
+            <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="Trabaja con nosotros" class="w-full h-full object-cover">
+        </div>
+        
+        <div class="absolute inset-0 bg-sv-primary/60 mix-blend-multiply"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-sv-primary/90 via-transparent to-transparent"></div>
+
+        <div class="relative z-10 text-center px-4">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-2 drop-shadow-lg tracking-tight">Lan egin gurekin</h1>
+            <div class="w-24 h-1 bg-sv-accent-3 mx-auto my-3 rounded-full shadow-sm"></div>
+            <p class="text-white text-xl md:text-2xl font-medium tracking-wide opacity-95 drop-shadow-md">Trabaja con nosotros</p>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-16 mb-10">
+        
+        <div class="bg-white p-8 md:p-12 rounded-2xl shadow-xl border-t-4 border-sv-primary border-gray-100">
+            
+            <div class="text-center mb-10">
+                <div class="inline-block p-3 bg-sv-light rounded-full mb-4">
+                    <svg class="w-10 h-10 text-sv-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-900 mb-4">Bidaliguzu zure CVa / Envíanos tu CV</h2>
+                <p class="text-gray-600 text-lg">
+                    Hezkuntzarekin konprometitutako pertsonen bila gabiltza. Gure taldean sartu nahi baduzu, bete formulario hau.
+                </p>
+                <div class="w-16 h-px bg-gray-200 mx-auto my-4"></div>
+                <p class="text-gray-500 text-sm italic">
+                    Buscamos personas comprometidas con la educación. Si quieres unirte a nuestro equipo, rellena este formulario.
+                </p>
+            </div>
+
+            <form action="https://formsubmit.co/svptitular@sanvicenteirun.com" method="POST" enctype="multipart/form-data" class="space-y-6">
+                
+                <input type="hidden" name="_next" value="https://sanvicenteirun.com"> 
+                <input type="hidden" name="_subject" value="Nuevo CV recibido - Trabaja con nosotros">
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">Izena <span class="font-normal text-gray-400">/ Nombre</span></label>
+                        <input type="text" name="Nombre" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sv-primary focus:border-sv-primary outline-none transition bg-gray-50 focus:bg-white" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">Abizenak <span class="font-normal text-gray-400">/ Apellidos</span></label>
+                        <input type="text" name="Apellidos" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sv-primary focus:border-sv-primary outline-none transition bg-gray-50 focus:bg-white" required>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-2">Posta Elektronikoa <span class="font-normal text-gray-400">/ Email</span></label>
+                    <input type="email" name="Email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sv-primary focus:border-sv-primary outline-none transition bg-gray-50 focus:bg-white" required>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-2">Titulazioa <span class="font-normal text-gray-400">/ Titulación</span></label>
+                    <input type="text" name="Titulacion" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sv-primary focus:border-sv-primary outline-none transition bg-gray-50 focus:bg-white" placeholder="Adibidez: Magisteritza Lehen Hezkuntza / Ejemplo: Magisterio Primaria">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-2">Erantsi CV (PDF) <span class="font-normal text-gray-400">/ Adjuntar CV</span></label>
+                    <div class="flex items-center justify-center w-full">
+                        <label class="relative flex flex-col w-full h-32 border-2 border-dashed border-gray-300 hover:border-sv-primary hover:bg-sv-light rounded-lg items-center justify-center cursor-pointer transition bg-gray-50 group">
+                            <div class="flex flex-col items-center justify-center pt-5 pb-6 text-center px-4">
+                                <svg class="w-8 h-8 text-gray-400 group-hover:text-sv-primary transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
+                                <p id="file-name" class="pt-1 text-sm tracking-wider text-gray-500 group-hover:text-sv-primary font-medium truncate max-w-xs md:max-w-md">
+                                    Hautatu fitxategia / Seleccionar archivo
+                                </p>
+                            </div>
+                            <input type="file" id="cv-file" name="CV_Attachment" class="absolute inset-0 opacity-0 cursor-pointer" accept=".pdf" required />
+                        </label>
+                    </div>
+                </div>
+
+                <div class="flex items-start mt-6">
+                    <div class="flex items-center h-5">
+                        <input id="privacy" type="checkbox" name="Acepta_Privacidad" class="w-4 h-4 text-sv-primary border-gray-300 rounded focus:ring-sv-primary" required>
+                    </div>
+                    <div class="ml-3 text-sm">
+                        <label for="privacy" class="font-medium text-gray-700">
+                            Onartzen dut <a href="#" class="text-sv-primary hover:underline font-bold">Pribatutasun Politika</a>.
+                        </label>
+                        <p class="text-gray-500 text-xs mt-1">Nire datuak soilik langileak hautatzeko prozesuetarako erabiliko dira. / Acepto la Política de Privacidad. Mis datos solo se usarán para procesos de selección.</p>
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full bg-sv-primary text-white font-bold py-4 rounded-lg hover:bg-opacity-90 hover:shadow-lg transition transform hover:-translate-y-0.5 text-lg mt-6">
+                    Bidali Eskaera / Enviar Solicitud
+                </button>
+            </form>
+        </div>
+
+    </main>
+
+    <script>
+        document.getElementById('cv-file').addEventListener('change', function(e) {
+            const fileName = e.target.files[0] ? e.target.files[0].name : "Hautatu fitxategia / Seleccionar archivo";
+            document.getElementById('file-name').textContent = fileName;
+        });
+    </script>
+
+</body>
+</html>

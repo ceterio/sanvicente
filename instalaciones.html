@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instalazioak | Instalaciones - San Vicente de Paúl</title>
+    
+    <!-- FUENTES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- ESTILOS (Tailwind) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'sv-primary': '#006D7B',      // Verde azulado oscuro
+                        'sv-accent-1': '#5FB3C5',     // Azul claro
+                        'sv-accent-2': '#95C11F',     // Verde lima
+                        'sv-accent-3': '#FDC300',     // Amarillo
+                        'sv-cta': '#F3953F',          // Naranja
+                        'sv-light': '#F9FAFB',        // Gris muy claro fondo
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { -webkit-font-smoothing: antialiased; }
+        .card-image-container {
+            overflow: hidden;
+        }
+        .card-image {
+            transition: transform 0.7s ease;
+        }
+        .group:hover .card-image {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800 flex flex-col min-h-screen font-sans">
+
+    <!-- 1. HERO SECTION -->
+    <header class="relative bg-sv-primary h-64 flex items-center justify-center overflow-hidden shadow-md">
+        <!-- Imagen de fondo -->
+        <div class="absolute inset-0 opacity-30">
+            <img src="https://cdn.pixabay.com/photo/2021/10/30/18/02/humboldt-university-6755230_960_720.jpg" alt="Instalaciones del Colegio" class="w-full h-full object-cover">
+        </div>
+        
+        <!-- Capas de contraste -->
+        <div class="absolute inset-0 bg-sv-primary/60 mix-blend-multiply"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-sv-primary/90 via-transparent to-transparent"></div>
+
+        <!-- Contenido -->
+        <div class="relative z-10 text-center px-4">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-2 drop-shadow-lg tracking-tight">Instalazioak</h1>
+            <div class="w-24 h-1 bg-sv-accent-2 mx-auto my-3 rounded-full shadow-sm"></div>
+            <p class="text-white text-xl md:text-2xl font-medium tracking-wide opacity-95 drop-shadow-md">Instalaciones</p>
+        </div>
+    </header>
+
+    <!-- 2. CONTENIDO PRINCIPAL -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-12 mb-10">
+
+        <!-- Intro -->
+        <div class="text-center max-w-3xl mx-auto mb-12">
+            <p class="text-lg text-gray-700 font-medium">
+                Gure ikasleen garapen integralerako espazio moderno eta egokituak.
+            </p>
+            <p class="text-gray-500 font-light mt-2">
+                Espacios modernos y adaptados para el desarrollo integral de nuestros alumnos.
+            </p>
+        </div>
+
+        <!-- Grid de Instalaciones -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <!-- 1. Aula de Psicomotricidad (Accent 1) -->
+            <div class="group bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-b-4 border-sv-accent-1">
+                <div class="h-56 card-image-container relative">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+                    <img src="https://cdn.pixabay.com/photo/2013/04/29/10/45/ball-107909_1280.jpg" class="w-full h-full object-cover card-image" alt="Psicomotricidad">
+                    <h3 class="absolute bottom-4 left-6 z-20 text-white font-bold text-xl drop-shadow-md">Psikomotrizitate Gela</h3>
+                </div>
+                <div class="p-6">
+                    <h4 class="text-sv-accent-1 font-bold uppercase text-xs tracking-wider mb-3">Aula de Psicomotricidad</h4>
+                    <p class="text-gray-700 text-sm leading-relaxed mb-3">
+                        Pentsatua eta diseinatua elementu finko eta mugikorrez arriskurik gabe gozatzeko eta gaitasun psikomotrizak garatzeko.
+                    </p>
+                    <p class="text-gray-500 text-xs italic border-t border-gray-100 pt-3">
+                        Pensada y diseñada para que puedan disfrutar sin ningún peligro de todos los elementos fijos y móviles y desarrollar sus capacidades psicomotrices.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 2. Informática / Aulas Móviles (Accent 2) -->
+            <div class="group bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-b-4 border-sv-accent-2">
+                <div class="h-56 card-image-container relative">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+                    <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover card-image" alt="Informática">
+                    <h3 class="absolute bottom-4 left-6 z-20 text-white font-bold text-xl drop-shadow-md">Gela Digitalak</h3>
+                </div>
+                <div class="p-6">
+                    <h4 class="text-sv-accent-2 font-bold uppercase text-xs tracking-wider mb-3">Aulas de Informática y Móviles</h4>
+                    <p class="text-gray-700 text-sm leading-relaxed mb-3">
+                        Lehen eta Bigarren Hezkuntzan, ekipamendu mugikorrak ditugu gela espazio digital bihurtzeko.
+                    </p>
+                    <p class="text-gray-500 text-xs italic border-t border-gray-100 pt-3">
+                        Hoy en día, tanto en Primaria como en Secundaria, disponemos de equipamientos móviles que permiten convertir el aula en un espacio digital.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 3. Laboratorio (Accent 3) -->
+            <div class="group bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-b-4 border-sv-accent-3">
+                <div class="h-56 card-image-container relative">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+                    <img src="https://images.unsplash.com/photo-1576086213369-97a306d36557?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover card-image" alt="Laboratorio">
+                    <h3 class="absolute bottom-4 left-6 z-20 text-white font-bold text-xl drop-shadow-md">Laborategia</h3>
+                </div>
+                <div class="p-6">
+                    <h4 class="text-sv-accent-3 font-bold uppercase text-xs tracking-wider mb-3">Laboratorio</h4>
+                    <p class="text-gray-700 text-sm leading-relaxed mb-3">
+                        Zientzia ikasgaietarako eta DBHko azken zikloko hautazko irakasgaietarako espazio espezializatua.
+                    </p>
+                    <p class="text-gray-500 text-xs italic border-t border-gray-100 pt-3">
+                        Utilizado frecuentemente por los alumnos que cursan asignaturas científicas u optativas del último ciclo de secundaria y materias especializadas.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 4. Comedor (Primary) -->
+            <div class="group bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-b-4 border-sv-primary">
+                <div class="h-56 card-image-container relative">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+                    <img src="https://cdn.pixabay.com/photo/2014/09/26/07/13/dining-tables-461863_1280.jpg" class="w-full h-full object-cover card-image" alt="Comedor">
+                    <h3 class="absolute bottom-4 left-6 z-20 text-white font-bold text-xl drop-shadow-md">Jangela</h3>
+                </div>
+                <div class="p-6">
+                    <h4 class="text-sv-primary font-bold uppercase text-xs tracking-wider mb-3">Comedor</h4>
+                    <p class="text-gray-700 text-sm leading-relaxed mb-3">
+                        Une honetan bi lokal ditugu jantoki-zerbitzua eskaintzeko.
+                    </p>
+                    <p class="text-gray-500 text-xs italic border-t border-gray-100 pt-3">
+                        En este momento disponemos de dos locales en los que se ofrece el servicio de comedor.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 5. Biblioteca (CTA) -->
+            <div class="group bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-b-4 border-sv-cta">
+                <div class="h-56 card-image-container relative">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+                    <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover card-image" alt="Biblioteca">
+                    <h3 class="absolute bottom-4 left-6 z-20 text-white font-bold text-xl drop-shadow-md">Liburutegia</h3>
+                </div>
+                <div class="p-6">
+                    <h4 class="text-sv-cta font-bold uppercase text-xs tracking-wider mb-3">Biblioteca</h4>
+                    <p class="text-gray-700 text-sm leading-relaxed mb-3">
+                        Aukera anitzeko espazioa: mediateka (ordenagailuak, arbela digitala, wifia). Zeregin malgu eta irekietarako aproposa.
+                    </p>
+                    <p class="text-gray-500 text-xs italic border-t border-gray-100 pt-3">
+                        Ofrece múltiples posibilidades. Funciona como mediateca y se emplea para extender diversas tareas que requieran un entorno más flexible.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 6. Tecnología (Accent 1) -->
+            <div class="group bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-b-4 border-sv-accent-1">
+                <div class="h-56 card-image-container relative">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+                    <img src="https://images.unsplash.com/photo-1581092921461-eab62e97a780?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover card-image" alt="Tecnología">
+                    <h3 class="absolute bottom-4 left-6 z-20 text-white font-bold text-xl drop-shadow-md">Teknologia Gela</h3>
+                </div>
+                <div class="p-6">
+                    <h4 class="text-sv-accent-1 font-bold uppercase text-xs tracking-wider mb-3">Tecnología</h4>
+                    <p class="text-gray-700 text-sm leading-relaxed mb-3">
+                        Argitasun handiko gela. Tailer-elementuak (tornuak) eta proiektuak muntatzeko beharrezko guztia dauka.
+                    </p>
+                    <p class="text-gray-500 text-xs italic border-t border-gray-100 pt-3">
+                        Aula dotada de mucha luz y gran amplitud. Tiene elementos de taller y todo lo necesario para el montaje de proyectos.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 7. Aulas Polivalentes (Accent 2) -->
+            <div class="group bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-b-4 border-sv-accent-2">
+                <div class="h-56 card-image-container relative">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+                    <img src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover card-image" alt="Aulas Polivalentes">
+                    <h3 class="absolute bottom-4 left-6 z-20 text-white font-bold text-xl drop-shadow-md">Gela Balioanitzak</h3>
+                </div>
+                <div class="p-6">
+                    <h4 class="text-sv-accent-2 font-bold uppercase text-xs tracking-wider mb-3">Aulas Polivalentes</h4>
+                    <p class="text-gray-700 text-sm leading-relaxed mb-3">
+                        Bilerak, erakusketak, eskulanak eta ikasleentzako arreta pertsonalizatua eskaintzeko espazioak.
+                    </p>
+                    <p class="text-gray-500 text-xs italic border-t border-gray-100 pt-3">
+                        Utilizadas para diversas actividades: zonas de reuniones, exhibición de trabajos, talleres de manualidades y atención personal.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 8. Gimnasio (Accent 3) -->
+            <div class="group bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-b-4 border-sv-accent-3">
+                <div class="h-56 card-image-container relative">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+                    <img src="https://images.unsplash.com/photo-1576678927484-cc907957088c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover card-image" alt="Gimnasio">
+                    <h3 class="absolute bottom-4 left-6 z-20 text-white font-bold text-xl drop-shadow-md">Gimnasioa</h3>
+                </div>
+                <div class="p-6">
+                    <h4 class="text-sv-accent-3 font-bold uppercase text-xs tracking-wider mb-3">Gimnasio</h4>
+                    <p class="text-gray-700 text-sm leading-relaxed mb-3">
+                        Sarrera anitz eta kokapen egokia. Espalderak, bankuak, koltxonetak eta material sintetikoa lurrean.
+                    </p>
+                    <p class="text-gray-500 text-xs italic border-t border-gray-100 pt-3">
+                        Accesos desde el patio. Dispone de espalderas, bancos, colchonetas y suelo sintético que garantiza el mantenimiento.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 9. Salón de Actos (Primary) -->
+            <div class="group bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-b-4 border-sv-primary">
+                <div class="h-56 card-image-container relative">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+                    <img src="https://cdn.pixabay.com/photo/2021/11/03/10/59/audience-6765385_1280.jpg" class="w-full h-full object-cover card-image" alt="Salón de Actos">
+                    <h3 class="absolute bottom-4 left-6 z-20 text-white font-bold text-xl drop-shadow-md">Areto Nagusia</h3>
+                </div>
+                <div class="p-6">
+                    <h4 class="text-sv-primary font-bold uppercase text-xs tracking-wider mb-3">Salón de Actos</h4>
+                    <p class="text-gray-700 text-sm leading-relaxed mb-3">
+                        Sarreratik gertu. Antzerkiak eta ekitaldiak egiteko agertokia eta argiztapen sistema ditu.
+                    </p>
+                    <p class="text-gray-500 text-xs italic border-t border-gray-100 pt-3">
+                        Situado junto a la entrada. Dispone de escenario y un sistema de iluminación diseñado para celebrar obras de teatro.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 10. Sala de Música (CTA) -->
+            <div class="group bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-b-4 border-sv-cta">
+                <div class="h-56 card-image-container relative">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+                    <img src="https://cdn.pixabay.com/photo/2017/09/06/08/13/drums-2720602_1280.jpg" class="w-full h-full object-cover card-image" alt="Música">
+                    <h3 class="absolute bottom-4 left-6 z-20 text-white font-bold text-xl drop-shadow-md">Musika Gela</h3>
+                </div>
+                <div class="p-6">
+                    <h4 class="text-sv-cta font-bold uppercase text-xs tracking-wider mb-3">Sala de Música</h4>
+                    <p class="text-gray-700 text-sm leading-relaxed mb-3">
+                        Ikus-entzunezko sistema, instrumentuak eta espazio irekia dinamika musikal eta psikomotrizetarako.
+                    </p>
+                    <p class="text-gray-500 text-xs italic border-t border-gray-100 pt-3">
+                        Equipada con sistema audiovisual e instrumentos. Espacio diáfano que permite realizar diferentes dinámicas musicales.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 11. Capilla (Accent 2) -->
+            <div class="group bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-b-4 border-sv-accent-2">
+                <div class="h-56 card-image-container relative">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+                    <img src="https://cdn.pixabay.com/photo/2014/10/22/18/16/church-498525_1280.jpg" class="w-full h-full object-cover card-image" alt="Capilla">
+                    <h3 class="absolute bottom-4 left-6 z-20 text-white font-bold text-xl drop-shadow-md">Kapera</h3>
+                </div>
+                <div class="p-6">
+                    <h4 class="text-sv-accent-2 font-bold uppercase text-xs tracking-wider mb-3">Capilla</h4>
+                    <p class="text-gray-700 text-sm leading-relaxed mb-3">
+                        Eraikinaren erdigunea. Eguneroko eukaristietarako eta ikasleen ospakizunetarako gunea.
+                    </p>
+                    <p class="text-gray-500 text-xs italic border-t border-gray-100 pt-3">
+                        Edificio singular en la parte central. Se celebran diariamente eucaristías abiertas al barrio y celebraciones escolares.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- (Sin Footer ni Nav) -->
+
+</body>
+</html>

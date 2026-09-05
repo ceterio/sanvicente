@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zerbitzuak | Servicios - San Vicente de Paúl</title>
+    
+    <!-- FUENTES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- ESTILOS (Tailwind) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'sv-primary': '#006D7B',      // Verde azulado oscuro
+                        'sv-accent-1': '#5FB3C5',     // Azul claro
+                        'sv-accent-2': '#95C11F',     // Verde lima
+                        'sv-accent-3': '#FDC300',     // Amarillo
+                        'sv-cta': '#F3953F',          // Naranja
+                        'sv-light': '#F9FAFB',        // Gris muy claro fondo
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { -webkit-font-smoothing: antialiased; }
+        
+        /* Estilos para el Modal */
+        dialog::backdrop {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+        }
+        dialog[open] {
+            animation: zoomIn 0.3s ease-out;
+        }
+        @keyframes zoomIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        /* Scrollbar personalizado */
+        .modal-scroll::-webkit-scrollbar {
+            width: 8px;
+        }
+        .modal-scroll::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+        .modal-scroll::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .modal-scroll::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800 flex flex-col min-h-screen">
+
+    <!-- 1. HERO SECTION -->
+    <header class="relative bg-sv-primary h-64 flex items-center justify-center overflow-hidden shadow-md">
+        <!-- Imagen de fondo -->
+        <div class="absolute inset-0 opacity-30">
+            <img src="https://images.unsplash.com/photo-1588072432836-e10032774350?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="Servicios Escolares" class="w-full h-full object-cover">
+        </div>
+        
+        <!-- Capas de contraste -->
+        <div class="absolute inset-0 bg-sv-primary/60 mix-blend-multiply"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-sv-primary/90 via-transparent to-transparent"></div>
+
+        <!-- Contenido -->
+        <div class="relative z-10 text-center px-4">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-2 drop-shadow-lg tracking-tight">Zerbitzuak</h1>
+            <div class="w-24 h-1 bg-sv-accent-3 mx-auto my-3 rounded-full shadow-sm"></div>
+            <p class="text-white text-xl md:text-2xl font-medium tracking-wide opacity-95 drop-shadow-md">Servicios</p>
+        </div>
+    </header>
+
+    <!-- 2. CONTENIDO PRINCIPAL -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-12 mb-10">
+
+        <!-- Intro -->
+        <div class="text-center max-w-3xl mx-auto">
+            <p class="text-xl text-gray-800 font-medium mb-2">
+                Familiak laguntzeko eta ikasleen garapena osatzeko zerbitzu sorta zabala eskaintzen dugu.
+            </p>
+            <p class="text-gray-500 text-lg font-light">
+                Ofrecemos una amplia gama de servicios para apoyar a las familias y complementar el desarrollo integral de los alumnos.
+            </p>
+        </div>
+
+        <!-- Grid de Servicios -->
+        <div class="grid md:grid-cols-2 gap-8">
+            
+            <!-- 1. AULA MADRUGADORES -->
+            <div class="bg-white p-8 rounded-xl shadow-lg border-l-4 border-sv-accent-1 hover:shadow-xl transition-all duration-300 group flex flex-col">
+                <div class="flex items-start gap-4 mb-4">
+                    <div class="p-3 bg-sv-accent-1/10 text-sv-accent-1 rounded-full group-hover:bg-sv-accent-1 group-hover:text-white transition-colors">
+                        <!-- Icono Sol/Reloj -->
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-900">Goiztiarren Gela</h3>
+                        <span class="text-sv-accent-1 font-medium">Aula de Madrugadores</span>
+                    </div>
+                </div>
+                <div class="space-y-3 text-gray-600 flex-grow">
+                    <p class="font-medium text-gray-800">
+                        Haur Hezkuntzako familientzako zerbitzua, eskola-orduak baino lehen haurrak zentroan uzteko aukera ematen duena.
+                    </p>
+                    <hr class="border-gray-100">
+                    <p class="text-sm italic">
+                        Ofrecemos este servicio a aquellas familias con hijos/as en la etapa de infantil que, por diversas situaciones, deben dejar a sus hijos/as en el centro antes del inicio del horario lectivo.
+                    </p>
+                    <p class="text-xs text-gray-400 mt-2 bg-gray-50 p-2 rounded">
+                        * Podría extenderse a otras etapas en función de las solicitudes y el espacio disponible.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 2. COMEDOR -->
+            <div class="bg-white p-8 rounded-xl shadow-lg border-l-4 border-sv-accent-2 hover:shadow-xl transition-all duration-300 group flex flex-col">
+                <div class="flex items-start gap-4 mb-4">
+                    <div class="p-3 bg-sv-accent-2/10 text-sv-accent-2 rounded-full group-hover:bg-sv-accent-2 group-hover:text-white transition-colors">
+                        <!-- Icono Cubiertos -->
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-900">Jangela</h3>
+                        <span class="text-sv-accent-2 font-medium">Comedor Escolar</span>
+                    </div>
+                </div>
+                <div class="space-y-3 text-gray-600 mb-6 flex-grow">
+                    <p class="font-medium text-gray-800">
+                        <strong class="text-sv-accent-2">Auzo Lagun</strong> enpresak eskainitako catering zerbitzua. Lau txandatan antolatuta adinaren arabera.
+                    </p>
+                    <hr class="border-gray-100">
+                    <p class="text-sm italic">
+                        El servicio de comedor es un catering ofrecido por la empresa Auzo Lagun. Se estructura en cuatro momentos atendiendo en cada uno de ellos y de acuerdo con sus horarios a alumnos/as de distintas edades.
+                    </p>
+                </div>
+                <div class="mt-auto">
+                    <a href="jangela.html" class="inline-flex items-center text-white bg-sv-accent-2 px-4 py-2 rounded-lg font-bold text-sm hover:bg-opacity-90 hover:shadow-md transition-all">
+                        Ikusi Menua eta Ordutegiak / Ver Menú y Horarios
+                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 3. EXTRAESCOLARES -->
+            <div class="bg-white p-8 rounded-xl shadow-lg border-l-4 border-sv-accent-3 hover:shadow-xl transition-all duration-300 group flex flex-col">
+                <div class="flex items-start gap-4 mb-4">
+                    <div class="p-3 bg-sv-accent-3/10 text-sv-accent-3 rounded-full group-hover:bg-sv-accent-3 group-hover:text-white transition-colors">
+                        <!-- Icono Actividades -->
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-900">Eskolaz Kanpokoak</h3>
+                        <span class="text-sv-accent-3 font-medium">Actividades Extraescolares</span>
+                    </div>
+                </div>
+                <div class="space-y-3 text-gray-600 flex-grow">
+                    <p class="font-medium text-gray-800">
+                        Kultura, artea, hizkuntzak eta robotika. Ikasleen sormena eta gaitasunak garatzeko aukera zabala.
+                    </p>
+                    <hr class="border-gray-100">
+                    <p class="text-sm italic">
+                        Se ofrece la posibilidad de realizar una serie de actividades extraescolares variadas como robótica, dibujo, inglés, etc.
+                    </p>
+                </div>
+                <div class="mt-4">
+                    <button onclick="openServiceModal('extraescolares')" class="inline-flex items-center text-sv-accent-3 font-bold text-sm hover:underline hover:text-sv-primary transition-colors cursor-pointer">
+                        Ikusi Jarduerak / Ver Actividades
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 4. DEPORTE ESCOLAR -->
+            <div class="bg-white p-8 rounded-xl shadow-lg border-l-4 border-sv-cta hover:shadow-xl transition-all duration-300 group flex flex-col">
+                <div class="flex items-start gap-4 mb-4">
+                    <div class="p-3 bg-sv-cta/10 text-sv-cta rounded-full group-hover:bg-sv-cta group-hover:text-white transition-colors">
+                        <!-- Icono Deporte -->
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-900">Eskola Kirola</h3>
+                        <span class="text-sv-cta font-medium">Deporte Escolar</span>
+                    </div>
+                </div>
+                <div class="space-y-3 text-gray-600 flex-grow">
+                    <p class="font-medium text-gray-800">
+                        6 eta 16 urte bitarteko ikasleentzat. Talde-lana eta ohitura osasungarriak sustatzen ditugu kirolaren bidez.
+                    </p>
+                    <hr class="border-gray-100">
+                    <p class="text-sm italic">
+                        Nuestro centro participa en este programa para la formación integral a través del deporte dirigido a estudiantes entre 6 y 16 años.
+                    </p>
+                </div>
+                <div class="mt-4">
+                    <button onclick="openServiceModal('deporte')" class="inline-flex items-center text-sv-cta font-bold text-sm hover:underline hover:text-sv-primary transition-colors cursor-pointer">
+                        Informazio Gehiago / Más Información
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- MODALES -->
+
+    <!-- EXTRAESCOLARES MODAL -->
+    <dialog id="modal-extraescolares" class="rounded-xl shadow-2xl p-0 w-full max-w-2xl bg-white backdrop:bg-gray-900/50 open:animate-zoomIn z-50">
+        <div class="bg-sv-accent-3 p-6 flex justify-between items-center text-gray-900 sticky top-0 z-10 shadow-md">
+            <div>
+                <h2 class="text-xl font-bold">Eskolaz Kanpokoak / Extraescolares</h2>
+            </div>
+            <button onclick="closeServiceModal('extraescolares')" class="hover:bg-black/10 p-2 rounded-full transition"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+        </div>
+        <div class="p-8 overflow-y-auto max-h-[70vh] modal-scroll">
+            <p class="text-gray-700 mb-4 font-medium">
+                Aukera zabala eskaintzen dugu ikasleen sormena, hizkuntzak eta gaitasun teknologikoak garatzeko.
+            </p>
+            <p class="text-gray-600 mb-6 italic text-sm">
+                Se ofrece la posibilidad de realizar una serie de actividades extraescolares variadas para fomentar la creatividad y el aprendizaje.
+            </p>
+            
+            <div class="grid sm:grid-cols-2 gap-4">
+                <div class="bg-yellow-50 p-4 rounded-lg border border-sv-accent-3/20">
+                    <h4 class="font-bold text-sv-primary mb-2 flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                        Robotika & Teknologia
+                    </h4>
+                    <p class="text-sm text-gray-600">Pentsamendu konputazionala eta arazoen ebazpena.</p>
+                </div>
+                <div class="bg-yellow-50 p-4 rounded-lg border border-sv-accent-3/20">
+                    <h4 class="font-bold text-sv-primary mb-2 flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/></svg>
+                        Hizkuntzak (Ingelesa)
+                    </h4>
+                    <p class="text-sm text-gray-600">Cambridge azterketak prestatzea (Flyers, KET, PET, First).</p>
+                </div>
+                <div class="bg-yellow-50 p-4 rounded-lg border border-sv-accent-3/20">
+                    <h4 class="font-bold text-sv-primary mb-2 flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                        Marrazketa & Artea
+                    </h4>
+                    <p class="text-sm text-gray-600">Sormena eta adierazpen artistikoa lantzea.</p>
+                </div>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- DEPORTE MODAL -->
+    <dialog id="modal-deporte" class="rounded-xl shadow-2xl p-0 w-full max-w-2xl bg-white backdrop:bg-gray-900/50 open:animate-zoomIn z-50">
+        <div class="bg-sv-cta p-6 flex justify-between items-center text-white sticky top-0 z-10 shadow-md">
+            <div>
+                <h2 class="text-xl font-bold">Eskola Kirola / Deporte Escolar</h2>
+            </div>
+            <button onclick="closeServiceModal('deporte')" class="hover:bg-white/20 p-2 rounded-full transition"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+        </div>
+        <div class="p-8 overflow-y-auto max-h-[70vh] modal-scroll">
+            <div class="mb-6">
+                <h4 class="text-lg font-bold text-gray-800 mb-2">Formakuntza Integrala Kirolaren bidez</h4>
+                <p class="text-gray-700 mb-2">
+                    Gure zentroak 6 eta 16 urte bitarteko ikasleei zuzendutako kirol-programan parte hartzen du. Helburua ez da soilik lehiatzea, baizik eta balioak barneratzea: errespetua, talde-lana eta ahalegina.
+                </p>
+                <p class="text-gray-600 text-sm italic">
+                    Nuestro centro participa en este programa para la formación integral a través del deporte dirigido a estudiantes entre 6 y 16 años. El objetivo va más allá de la competición: inculcar valores como el respeto, el trabajo en equipo y el esfuerzo.
+                </p>
+            </div>
+
+            <div class="bg-orange-50 p-5 rounded-xl border border-sv-cta/30">
+                <h5 class="font-bold text-sv-cta mb-3 uppercase tracking-wide text-sm">Jarduerak / Actividades</h5>
+                <ul class="grid grid-cols-2 gap-y-2 gap-x-4 text-gray-700">
+                    <li class="flex items-center gap-2"><span class="w-2 h-2 bg-sv-cta rounded-full"></span> Saskibaloia / Baloncesto</li>
+                    <li class="flex items-center gap-2"><span class="w-2 h-2 bg-sv-cta rounded-full"></span> Futbola / Fútbol</li>
+                    <li class="flex items-center gap-2"><span class="w-2 h-2 bg-sv-cta rounded-full"></span> Eskubaloia / Balonmano</li>
+                    <li class="flex items-center gap-2"><span class="w-2 h-2 bg-sv-cta rounded-full"></span> Multikirola / Multideporte</li>
+                </ul>
+            </div>
+        </div>
+    </dialog>
+
+    <script>
+        function openServiceModal(id) {
+            const modal = document.getElementById(`modal-${id}`);
+            if (modal) {
+                modal.showModal();
+                document.body.style.overflow = 'hidden'; 
+            }
+        }
+
+        function closeServiceModal(id) {
+            const modal = document.getElementById(`modal-${id}`);
+            if (modal) {
+                modal.close();
+                document.body.style.overflow = '';
+            }
+        }
+
+        document.querySelectorAll('dialog').forEach(dialog => {
+            dialog.addEventListener('click', (e) => {
+                if (e.target === dialog) {
+                    dialog.close();
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+    </script>
+
+    <!-- (Sin Footer ni Nav) -->
+
+</body>
+</html>

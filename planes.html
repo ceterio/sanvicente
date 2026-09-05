@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ikastetxeko Planak | Planes de Centro - San Vicente de Paúl</title>
+    
+    <!-- FUENTES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- ESTILOS (Tailwind) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'sv-primary': '#006D7B',      // Verde azulado oscuro
+                        'sv-accent-1': '#5FB3C5',     // Azul claro
+                        'sv-accent-2': '#95C11F',     // Verde lima
+                        'sv-accent-3': '#FDC300',     // Amarillo
+                        'sv-cta': '#F3953F',          // Naranja
+                        'sv-light': '#F9FAFB',        // Gris muy claro fondo
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { -webkit-font-smoothing: antialiased; }
+        
+        /* Estilos para el Modal del PDF */
+        dialog::backdrop {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(4px);
+        }
+        dialog[open] {
+            animation: fadeIn 0.3s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800 flex flex-col min-h-screen font-sans">
+
+    <!-- 1. HERO SECTION -->
+    <header class="relative bg-sv-primary h-64 flex items-center justify-center overflow-hidden shadow-md">
+        <!-- Imagen de fondo -->
+        <div class="absolute inset-0 opacity-30">
+            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="Planes de Centro" class="w-full h-full object-cover">
+        </div>
+        
+        <!-- Capas de contraste -->
+        <div class="absolute inset-0 bg-sv-primary/60 mix-blend-multiply"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-sv-primary/90 via-transparent to-transparent"></div>
+
+        <!-- Contenido -->
+        <div class="relative z-10 text-center px-4">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-2 drop-shadow-lg tracking-tight">Ikastetxeko Planak</h1>
+            <div class="w-24 h-1 bg-sv-accent-3 mx-auto my-3 rounded-full shadow-sm"></div>
+            <p class="text-white text-xl md:text-2xl font-medium tracking-wide opacity-95 drop-shadow-md">Planes de Centro</p>
+        </div>
+    </header>
+
+    <!-- 2. CONTENIDO PRINCIPAL -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-16 mb-10">
+
+        <!-- Intro -->
+        <div class="text-center max-w-3xl mx-auto">
+            <p class="text-lg text-gray-600">
+                Hemen aurkituko dituzu ikastetxearen antolaketa eta funtzionamendua gidatzen duten dokumentu nagusiak.
+                <br>
+                <span class="text-sm font-light italic">Aquí encontrarás los principales documentos que guían la organización y el funcionamiento del centro.</span>
+            </p>
+        </div>
+
+        <!-- Sección: Planes Generales -->
+        <div>
+            <h2 class="text-2xl font-bold text-sv-primary mb-8 flex items-center gap-3 pl-4 border-l-4 border-sv-accent-2">
+                Plan Orokorrak <span class="text-gray-400 text-lg font-normal">/ Planes Generales</span>
+            </h2>
+            <div class="grid lg:grid-cols-2 gap-6">
+                
+                <!-- Plan 1: Urteko Plana -->
+                <div class="group bg-white rounded-xl shadow-sm border border-gray-200 p-6 flex flex-col hover:shadow-lg transition-all duration-300 border-t-4 border-t-transparent hover:border-t-sv-primary">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="bg-sv-light p-3 rounded-full text-sv-primary group-hover:bg-sv-primary group-hover:text-white transition-colors duration-300">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 group-hover:text-sv-primary transition-colors">Urteko Plana</h3>
+                            <p class="text-gray-500 text-sm">Plan Anual de Centro</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-auto space-y-3">
+                        <!-- EU -->
+                        <div class="flex items-center justify-between bg-sv-light rounded-lg p-2 border border-gray-100">
+                            <span class="text-xs font-bold text-sv-primary ml-2 bg-white px-2 py-1 rounded border border-gray-200">EU</span>
+                            <div class="flex gap-2">
+                                <button onclick="openPdfModal('#URL_PENDIENTE_EU_1')" class="p-1.5 text-sv-primary hover:bg-sv-primary hover:text-white rounded transition" title="Bistaratu / Ver"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></button>
+                                <a href="#" class="p-1.5 text-gray-500 hover:bg-sv-primary hover:text-white rounded transition" title="Deskargatu / Descargar"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a>
+                            </div>
+                        </div>
+                        <!-- CAS -->
+                        <div class="flex items-center justify-between bg-sv-light rounded-lg p-2 border border-gray-100">
+                            <span class="text-xs font-bold text-gray-500 ml-2 bg-white px-2 py-1 rounded border border-gray-200">CAS</span>
+                            <div class="flex gap-2">
+                                <button onclick="openPdfModal('#URL_PENDIENTE_CAS_1')" class="p-1.5 text-sv-primary hover:bg-sv-primary hover:text-white rounded transition" title="Bistaratu / Ver"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></button>
+                                <a href="#" class="p-1.5 text-gray-500 hover:bg-sv-primary hover:text-white rounded transition" title="Deskargatu / Descargar"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Plan 2: Bizikidetza -->
+                <div class="group bg-white rounded-xl shadow-sm border border-gray-200 p-6 flex flex-col hover:shadow-lg transition-all duration-300 border-t-4 border-t-transparent hover:border-t-sv-primary">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="bg-sv-light p-3 rounded-full text-sv-primary group-hover:bg-sv-primary group-hover:text-white transition-colors duration-300">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 group-hover:text-sv-primary transition-colors">Bizikidetza Plana</h3>
+                            <p class="text-gray-500 text-sm">Plan de Convivencia</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-auto space-y-3">
+                        <div class="flex items-center justify-between bg-sv-light rounded-lg p-2 border border-gray-100">
+                            <span class="text-xs font-bold text-sv-primary ml-2 bg-white px-2 py-1 rounded border border-gray-200">EU</span>
+                            <div class="flex gap-2">
+                                <button onclick="openPdfModal('#URL_PENDIENTE_EU_2')" class="p-1.5 text-sv-primary hover:bg-sv-primary hover:text-white rounded transition"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></button>
+                                <a href="#" class="p-1.5 text-gray-500 hover:bg-sv-primary hover:text-white rounded transition"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between bg-sv-light rounded-lg p-2 border border-gray-100">
+                            <span class="text-xs font-bold text-gray-500 ml-2 bg-white px-2 py-1 rounded border border-gray-200">CAS</span>
+                            <div class="flex gap-2">
+                                <button onclick="openPdfModal('#URL_PENDIENTE_CAS_2')" class="p-1.5 text-sv-primary hover:bg-sv-primary hover:text-white rounded transition"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></button>
+                                <a href="#" class="p-1.5 text-gray-500 hover:bg-sv-primary hover:text-white rounded transition"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Plan 3: Digitala -->
+                <div class="group bg-white rounded-xl shadow-sm border border-gray-200 p-6 flex flex-col hover:shadow-lg transition-all duration-300 border-t-4 border-t-transparent hover:border-t-sv-primary">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="bg-sv-light p-3 rounded-full text-sv-primary group-hover:bg-sv-primary group-hover:text-white transition-colors duration-300">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 group-hover:text-sv-primary transition-colors">Plan Digitala</h3>
+                            <p class="text-gray-500 text-sm">Plan Digital</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-auto space-y-3">
+                        <div class="flex items-center justify-between bg-sv-light rounded-lg p-2 border border-gray-100">
+                            <span class="text-xs font-bold text-sv-primary ml-2 bg-white px-2 py-1 rounded border border-gray-200">EU</span>
+                            <div class="flex gap-2">
+                                <button onclick="openPdfModal('https://docs.google.com/document/d/1YJqvTmHzRquV9Uq1L8OzGA001YjCRJEAwMSWeUkaZ2U/preview')" class="p-1.5 text-sv-primary hover:bg-sv-primary hover:text-white rounded transition"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></button>
+                                <a href="https://docs.google.com/document/d/1YJqvTmHzRquV9Uq1L8OzGA001YjCRJEAwMSWeUkaZ2U/export?format=pdf" class="p-1.5 text-gray-500 hover:bg-sv-primary hover:text-white rounded transition"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between bg-sv-light rounded-lg p-2 border border-gray-100">
+                            <span class="text-xs font-bold text-gray-500 ml-2 bg-white px-2 py-1 rounded border border-gray-200">CAS</span>
+                            <div class="flex gap-2">
+                                <button onclick="openPdfModal('https://docs.google.com/document/d/1YJqvTmHzRquV9Uq1L8OzGA001YjCRJEAwMSWeUkaZ2U/preview')" class="p-1.5 text-sv-primary hover:bg-sv-primary hover:text-white rounded transition"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></button>
+                                <a href="https://docs.google.com/document/d/1YJqvTmHzRquV9Uq1L8OzGA001YjCRJEAwMSWeUkaZ2U/export?format=pdf" class="p-1.5 text-gray-500 hover:bg-sv-primary hover:text-white rounded transition"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Plan 4: Hizkuntza -->
+                <div class="group bg-white rounded-xl shadow-sm border border-gray-200 p-6 flex flex-col hover:shadow-lg transition-all duration-300 border-t-4 border-t-transparent hover:border-t-sv-primary">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="bg-sv-light p-3 rounded-full text-sv-primary group-hover:bg-sv-primary group-hover:text-white transition-colors duration-300">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 group-hover:text-sv-primary transition-colors">Hizkuntza Proiektua</h3>
+                            <p class="text-gray-500 text-sm">Proyecto Lingüístico</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-auto space-y-3">
+                        <div class="flex items-center justify-between bg-sv-light rounded-lg p-2 border border-gray-100">
+                            <span class="text-xs font-bold text-sv-primary ml-2 bg-white px-2 py-1 rounded border border-gray-200">EU</span>
+                            <div class="flex gap-2">
+                                <button onclick="openPdfModal('#URL_PENDIENTE_EU_4')" class="p-1.5 text-sv-primary hover:bg-sv-primary hover:text-white rounded transition"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></button>
+                                <a href="#" class="p-1.5 text-gray-500 hover:bg-sv-primary hover:text-white rounded transition"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between bg-sv-light rounded-lg p-2 border border-gray-100">
+                            <span class="text-xs font-bold text-gray-500 ml-2 bg-white px-2 py-1 rounded border border-gray-200">CAS</span>
+                            <div class="flex gap-2">
+                                <button onclick="openPdfModal('#URL_PENDIENTE_CAS_4')" class="p-1.5 text-sv-primary hover:bg-sv-primary hover:text-white rounded transition"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></button>
+                                <a href="#" class="p-1.5 text-gray-500 hover:bg-sv-primary hover:text-white rounded transition"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección: Planes por Etapa -->
+        <div>
+            <h2 class="text-2xl font-bold text-sv-primary mb-8 flex items-center gap-3 pl-4 border-l-4 border-sv-accent-1">
+                Etapako Planak <span class="text-gray-400 text-lg font-normal">/ Planes por Etapa</span>
+            </h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                
+                <!-- Infantil -->
+                <div class="group bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-xl transition-all hover:border-t-4 hover:border-t-sv-accent-1 flex flex-col">
+                    <div class="text-center mb-4">
+                        <div class="mb-4 text-sv-accent-1 inline-block p-3 rounded-full bg-sv-accent-1/10 group-hover:bg-sv-accent-1 group-hover:text-white transition-colors">
+                            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-1">Haur Hezkuntza</h3>
+                        <p class="text-xs font-bold text-sv-accent-1 uppercase tracking-wide">Educación Infantil</p>
+                    </div>
+                    
+                    <div class="mt-auto space-y-3">
+                        <!-- EU -->
+                        <div class="flex items-center justify-between bg-sv-light rounded-lg p-2 border border-gray-100">
+                            <span class="text-xs font-bold text-sv-primary ml-2 bg-white px-2 py-1 rounded border border-gray-200">EU</span>
+                            <div class="flex gap-2">
+                                <button onclick="openPdfModal('https://drive.google.com/file/d/1SiR6cbrZqXL52V_T2nKXzSZgsvg0RFJd/preview')" class="p-1.5 text-sv-primary hover:bg-sv-primary hover:text-white rounded transition" title="Bistaratu / Ver">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                                </button>
+                                <a href="https://drive.google.com/uc?export=download&id=1SiR6cbrZqXL52V_T2nKXzSZgsvg0RFJd" class="p-1.5 text-gray-500 hover:bg-sv-cta hover:text-white rounded transition" title="Deskargatu / Descargar">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- CAS -->
+                        <div class="flex items-center justify-between bg-sv-light rounded-lg p-2 border border-gray-100">
+                            <span class="text-xs font-bold text-gray-500 ml-2 bg-white px-2 py-1 rounded border border-gray-200">CAS</span>
+                            <div class="flex gap-2">
+                                <button onclick="openPdfModal('https://drive.google.com/file/d/1d80InaKdlBxs5_DIdF7drJzkhFHPAn81/preview')" class="p-1.5 text-sv-primary hover:bg-sv-primary hover:text-white rounded transition" title="Bistaratu / Ver">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                                </button>
+                                <a href="https://drive.google.com/uc?export=download&id=1d80InaKdlBxs5_DIdF7drJzkhFHPAn81" class="p-1.5 text-gray-500 hover:bg-sv-cta hover:text-white rounded transition" title="Deskargatu / Descargar">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Primaria -->
+                <div class="group bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-xl transition-all hover:border-t-4 hover:border-t-sv-accent-2 flex flex-col">
+                    <div class="text-center mb-4">
+                        <div class="mb-4 text-sv-accent-2 inline-block p-3 rounded-full bg-sv-accent-2/10 group-hover:bg-sv-accent-2 group-hover:text-white transition-colors">
+                            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-1">Lehen Hezkuntza</h3>
+                        <p class="text-xs font-bold text-sv-accent-2 uppercase tracking-wide">Educación Primaria</p>
+                    </div>
+
+                    <div class="mt-auto space-y-3">
+                        <!-- EU -->
+                        <div class="flex items-center justify-between bg-sv-light rounded-lg p-2 border border-gray-100">
+                            <span class="text-xs font-bold text-sv-primary ml-2 bg-white px-2 py-1 rounded border border-gray-200">EU</span>
+                            <div class="flex gap-2">
+                                <button onclick="openPdfModal('https://drive.google.com/file/d/1Y7FbZgL9mAosFMZuXTLH0O2gxgC6eJox/preview')" class="p-1.5 text-sv-primary hover:bg-sv-primary hover:text-white rounded transition" title="Bistaratu / Ver">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                                </button>
+                                <a href="https://drive.google.com/uc?export=download&id=1Y7FbZgL9mAosFMZuXTLH0O2gxgC6eJox" class="p-1.5 text-gray-500 hover:bg-sv-cta hover:text-white rounded transition" title="Deskargatu / Descargar">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- CAS -->
+                        <div class="flex items-center justify-between bg-sv-light rounded-lg p-2 border border-gray-100">
+                            <span class="text-xs font-bold text-gray-500 ml-2 bg-white px-2 py-1 rounded border border-gray-200">CAS</span>
+                            <div class="flex gap-2">
+                                <button onclick="openPdfModal('https://drive.google.com/file/d/1GJ94BEm8thBfKMLxvKpBdja9NgknEBhq/preview')" class="p-1.5 text-sv-primary hover:bg-sv-primary hover:text-white rounded transition" title="Bistaratu / Ver">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                                </button>
+                                <a href="https://drive.google.com/uc?export=download&id=1GJ94BEm8thBfKMLxvKpBdja9NgknEBhq" class="p-1.5 text-gray-500 hover:bg-sv-cta hover:text-white rounded transition" title="Deskargatu / Descargar">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Secundaria -->
+                <div class="group bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-xl transition-all hover:border-t-4 hover:border-t-sv-cta flex flex-col">
+                    <div class="text-center mb-4">
+                        <div class="mb-4 text-sv-cta inline-block p-3 rounded-full bg-sv-cta/10 group-hover:bg-sv-cta group-hover:text-white transition-colors">
+                            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-1">Bigarren Hezkuntza</h3>
+                        <p class="text-xs font-bold text-sv-cta uppercase tracking-wide">Educación Secundaria</p>
+                    </div>
+
+                    <div class="mt-auto space-y-3">
+                        <!-- EU -->
+                        <div class="flex items-center justify-between bg-sv-light rounded-lg p-2 border border-gray-100">
+                            <span class="text-xs font-bold text-sv-primary ml-2 bg-white px-2 py-1 rounded border border-gray-200">EU</span>
+                            <div class="flex gap-2">
+                                <button onclick="openPdfModal('https://drive.google.com/file/d/1aT6GTCTsTuS4hq_SuVX5ACJp9nnA6g5J/preview')" class="p-1.5 text-sv-primary hover:bg-sv-primary hover:text-white rounded transition" title="Bistaratu / Ver">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                                </button>
+                                <a href="https://drive.google.com/uc?export=download&id=1aT6GTCTsTuS4hq_SuVX5ACJp9nnA6g5J" class="p-1.5 text-gray-500 hover:bg-sv-cta hover:text-white rounded transition" title="Deskargatu / Descargar">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- CAS -->
+                        <div class="flex items-center justify-between bg-sv-light rounded-lg p-2 border border-gray-100">
+                            <span class="text-xs font-bold text-gray-500 ml-2 bg-white px-2 py-1 rounded border border-gray-200">CAS</span>
+                            <div class="flex gap-2">
+                                <button onclick="openPdfModal('https://drive.google.com/file/d/1Hcu62vteiiVw7TfGQKZMJeCrlwktmtXn/preview')" class="p-1.5 text-sv-primary hover:bg-sv-primary hover:text-white rounded transition" title="Bistaratu / Ver">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                                </button>
+                                <a href="https://drive.google.com/uc?export=download&id=1Hcu62vteiiVw7TfGQKZMJeCrlwktmtXn" class="p-1.5 text-gray-500 hover:bg-sv-cta hover:text-white rounded transition" title="Deskargatu / Descargar">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Sección: Normativa -->
+        <div class="mt-8">
+            <div class="group bg-sv-light rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-all border-l-4 border-l-transparent hover:border-l-sv-primary flex flex-col md:flex-row items-center justify-between">
+                <div class="flex items-center gap-4 mb-6 md:mb-0">
+                    <div class="bg-gray-200 p-3 rounded-full text-gray-600 group-hover:bg-sv-primary group-hover:text-white transition-colors duration-300">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M12 2a10 10 0 100 20 10 10 0 000-20zM12 9v4"/></svg>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800">Gailu pertsonalen erabilera araudia</h3>
+                        <p class="text-gray-500 text-sm">Regulación del uso de dispositivos personales</p>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+                    <!-- EU -->
+                    <div class="flex items-center justify-between bg-white rounded-lg p-2 border border-gray-200 md:w-auto w-full">
+                        <span class="text-xs font-bold text-sv-primary mr-3 bg-gray-50 px-2 py-1 rounded border border-gray-100">EU</span>
+                        <div class="flex gap-2">
+                            <button onclick="openPdfModal('https://drive.google.com/file/d/1PC-_m_fnEOIIfvJpKtMM53HPlHwtkHzE/preview')" class="p-1.5 text-sv-primary hover:bg-sv-primary hover:text-white rounded transition" title="Bistaratu / Ver">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                            </button>
+                            <a href="https://drive.google.com/uc?export=download&id=1PC-_m_fnEOIIfvJpKtMM53HPlHwtkHzE" class="p-1.5 text-gray-500 hover:bg-sv-cta hover:text-white rounded transition" title="Deskargatu / Descargar">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- CAS -->
+                    <div class="flex items-center justify-between bg-white rounded-lg p-2 border border-gray-200 md:w-auto w-full">
+                        <span class="text-xs font-bold text-gray-500 mr-3 bg-gray-50 px-2 py-1 rounded border border-gray-100">CAS</span>
+                        <div class="flex gap-2">
+                            <button onclick="openPdfModal('https://drive.google.com/file/d/1PC-_m_fnEOIIfvJpKtMM53HPlHwtkHzE/preview')" class="p-1.5 text-sv-primary hover:bg-sv-primary hover:text-white rounded transition" title="Bistaratu / Ver">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                            </button>
+                            <a href="https://drive.google.com/uc?export=download&id=1PC-_m_fnEOIIfvJpKtMM53HPlHwtkHzE" class="p-1.5 text-gray-500 hover:bg-sv-cta hover:text-white rounded transition" title="Deskargatu / Descargar">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Modal Visor PDF -->
+    <dialog id="pdf-modal" class="w-full max-w-5xl h-[85vh] p-0 rounded-xl shadow-2xl bg-white backdrop:bg-gray-900/80">
+        <div class="flex flex-col h-full">
+            <div class="bg-gray-800 text-white p-4 flex justify-between items-center">
+                <span class="font-bold text-lg">Dokumentuaren Bistarapena / Visualización de Documento</span>
+                <button onclick="closePdfModal()" class="text-gray-300 hover:text-white hover:bg-gray-700 p-2 rounded-full transition">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <div class="flex-grow bg-gray-100 relative">
+                <!-- Iframe para cargar el visor de PDF -->
+                <iframe id="pdf-frame" class="w-full h-full border-none" src=""></iframe>
+                <!-- Loader simple mientras carga -->
+                <div id="loader" class="absolute inset-0 flex items-center justify-center bg-gray-50 z-[-1]">
+                    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-sv-primary"></div>
+                </div>
+            </div>
+        </div>
+    </dialog>
+
+    <script>
+        const pdfModal = document.getElementById('pdf-modal');
+        const pdfFrame = document.getElementById('pdf-frame');
+
+        function openPdfModal(driveUrl) {
+            // Nota: Para que funcione con Drive, la URL debe ser del tipo 'preview'.
+            // Si el usuario pone el enlace normal de compartir, intentaremos convertirlo o usarlo tal cual si ya es preview.
+            // Ejemplo de enlace esperado: https://drive.google.com/file/d/FILE_ID/preview
+            
+            if (driveUrl && driveUrl !== 'URL_DEL_PDF_EN_DRIVE_1') { // Comprobación simple para el placeholder
+                pdfFrame.src = driveUrl;
+                pdfModal.showModal();
+                document.body.style.overflow = 'hidden';
+            } else {
+                alert("Dokumentua ez dago eskuragarri une honetan. / El documento no está disponible en este momento.");
+            }
+        }
+
+        function closePdfModal() {
+            pdfModal.close();
+            pdfFrame.src = ""; // Limpiar src para detener carga
+            document.body.style.overflow = '';
+        }
+
+        pdfModal.addEventListener('click', (e) => {
+            if (e.target === pdfModal) {
+                closePdfModal();
+            }
+        });
+    </script>
+
+</body>
+</html>

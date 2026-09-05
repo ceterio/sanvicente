@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ordutegiak | Horarios - San Vicente de Paúl</title>
+    
+    <!-- FUENTES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- ESTILOS (Tailwind) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'sv-primary': '#006D7B',      // Verde azulado oscuro
+                        'sv-accent-1': '#5FB3C5',     // Azul claro
+                        'sv-accent-2': '#95C11F',     // Verde lima
+                        'sv-accent-3': '#FDC300',     // Amarillo
+                        'sv-cta': '#F3953F',          // Naranja
+                        'sv-light': '#F9FAFB',        // Gris muy claro fondo
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Montserrat', sans-serif; }
+    </style>
+</head>
+<body class="bg-white text-gray-800">
+
+    <!-- HERO SECTION (Sin menú superior) -->
+    <header class="relative bg-sv-primary h-64 flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 opacity-20">
+            <!-- Imagen genérica para horarios -->
+            <img src="https://cdn.pixabay.com/photo/2016/08/02/23/52/bag-1565402_1280.jpg" alt="Fondo Horarios" class="w-full h-full object-cover">
+        </div>
+        <div class="relative z-10 text-center px-4">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-2">Ordutegiak</h1>
+            <div class="w-16 h-1 bg-sv-accent-1 mx-auto my-3"></div>
+            <p class="text-white text-xl font-medium tracking-wide opacity-90">Horarios</p>
+        </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-12">
+
+        <h2 class="text-3xl font-bold text-sv-primary text-center mb-10">Eskola Jardunaldia / Jornada Escolar</h2>
+
+        <!-- SECCIÓN 1: INFANTIL (HAUR HEZKUNTZA) -->
+        <div class="bg-white rounded-2xl shadow-lg border-t-8 border-sv-accent-1 overflow-hidden">
+            <div class="bg-sv-accent-1/10 p-6 border-b border-sv-accent-1/20">
+                <div class="flex items-center gap-4">
+                    <div class="bg-sv-accent-1 text-white p-3 rounded-full">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-sv-primary">Haur Hezkuntza <span class="text-gray-400 font-light text-lg">| Infantil (2-6)</span></h2>
+                    </div>
+                </div>
+            </div>
+            <div class="p-8 grid md:grid-cols-2 gap-8">
+                <!-- Mañana -->
+                <div class="flex flex-col items-center justify-center p-6 bg-sv-light rounded-xl border border-gray-100">
+                    <span class="text-sv-accent-1 font-bold uppercase tracking-widest text-xs mb-2">Goizez / Mañana</span>
+                    <span class="text-4xl font-bold text-gray-800">09:00 - 12:30</span>
+                </div>
+                <!-- Tarde -->
+                <div class="flex flex-col items-center justify-center p-6 bg-sv-light rounded-xl border border-gray-100">
+                    <span class="text-sv-accent-1 font-bold uppercase tracking-widest text-xs mb-2">Arratsaldez / Tarde</span>
+                    <span class="text-4xl font-bold text-gray-800">14:30 - 16:30</span>
+                </div>
+                <!-- Nota Amigable -->
+                <div class="md:col-span-2 flex items-center gap-3 bg-blue-50 text-blue-800 p-4 rounded-xl border border-blue-100">
+                    <svg class="w-6 h-6 text-blue-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    <p class="text-sm"><strong>Asteazkenak / Miércoles:</strong> Jardunaldi jarraitua / Jornada continua (09:00 - 12:30).</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 2: PRIMARIA (LEHEN HEZKUNTZA) -->
+        <div class="bg-white rounded-2xl shadow-lg border-t-8 border-sv-accent-2 overflow-hidden">
+            <div class="bg-sv-accent-2/10 p-6 border-b border-sv-accent-2/20">
+                <div class="flex items-center gap-4">
+                    <div class="bg-sv-accent-2 text-white p-3 rounded-full">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-sv-primary">Lehen Hezkuntza <span class="text-gray-400 font-light text-lg">| Primaria (6-12)</span></h2>
+                    </div>
+                </div>
+            </div>
+            <div class="p-8 grid md:grid-cols-2 gap-8">
+                <!-- Mañana -->
+                <div class="flex flex-col items-center justify-center p-6 bg-sv-light rounded-xl border border-gray-100">
+                    <span class="text-sv-accent-2 font-bold uppercase tracking-widest text-xs mb-2">Goizez / Mañana</span>
+                    <span class="text-4xl font-bold text-gray-800">09:00 - 13:00</span>
+                </div>
+                <!-- Tarde -->
+                <div class="flex flex-col items-center justify-center p-6 bg-sv-light rounded-xl border border-gray-100">
+                    <span class="text-sv-accent-2 font-bold uppercase tracking-widest text-xs mb-2">Arratsaldez / Tarde</span>
+                    <span class="text-4xl font-bold text-gray-800">14:45 - 16:45</span>
+                </div>
+                <!-- Nota Amigable -->
+                <div class="md:col-span-2 flex items-center gap-3 bg-blue-50 text-blue-800 p-4 rounded-xl border border-blue-100">
+                    <svg class="w-6 h-6 text-blue-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    <p class="text-sm"><strong>Asteazkenak / Miércoles:</strong> Jardunaldi jarraitua / Jornada continua (09:00 - 12:30).</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 3: SECUNDARIA (DBH) -->
+        <div class="bg-white rounded-2xl shadow-lg border-t-8 border-sv-cta overflow-hidden">
+            <div class="bg-sv-cta/10 p-6 border-b border-sv-cta/20">
+                <div class="flex items-center gap-4">
+                    <div class="bg-sv-cta text-white p-3 rounded-full">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-sv-primary">DBH <span class="text-gray-400 font-light text-lg">| Secundaria (12-16)</span></h2>
+                    </div>
+                </div>
+            </div>
+            <div class="p-8 grid md:grid-cols-2 gap-8">
+                <!-- L-M-J -->
+                <div class="flex flex-col items-center justify-center p-6 bg-sv-light rounded-xl border border-gray-100 text-center">
+                    <span class="text-sv-cta font-bold uppercase tracking-widest text-xs mb-2">Al - Ar - Og / L - M - J</span>
+                    <span class="text-4xl font-bold text-gray-800">08:30 - 13:40 / 14:50 - 15:45</span>
+                    <span class="text-xs text-gray-500 mt-2"> </span>
+                </div>
+                <!-- X-V -->
+                <div class="flex flex-col items-center justify-center p-6 bg-sv-light rounded-xl border border-gray-100 text-center">
+                    <span class="text-sv-cta font-bold uppercase tracking-widest text-xs mb-2">Az - Ol / X - V</span>
+                    <span class="text-4xl font-bold text-gray-800">08:30 - 14:30</span>
+                    <span class="text-xs text-gray-500 mt-2">(Jardunaldi jarraitua / Jornada continua)</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- SECCIÓN 4: SECRETARÍA Y ADMINISTRACIÓN -->
+        <h2 class="text-3xl font-bold text-sv-primary text-center pt-8 mb-10">Idazkaritza eta Administrazioa</h2>
+
+        <div class="grid md:grid-cols-2 gap-8">
+            
+            <!-- SECRETARÍA -->
+            <div class="bg-sv-light p-8 rounded-2xl border border-gray-100 flex flex-col items-center text-center hover:shadow-md transition relative group">
+                 <!-- Botón de Email Flotante -->
+                 <a href="mailto:idazkaritza@sanvicenteirun.com" class="absolute top-4 right-4 bg-white p-2 rounded-full shadow-sm text-sv-primary hover:bg-sv-primary hover:text-white transition" title="Bidali mezua / Enviar mensaje">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                </a>
+
+                <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center text-sv-primary mb-4 shadow-sm">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-1">Idazkaritza</h3>
+                <p class="text-sm text-gray-500 mb-6">Secretaría</p>
+                
+                <div class="space-y-3 w-full">
+                    <div class="bg-white p-3 rounded-lg border border-gray-200">
+                        <span class="block text-xs font-bold text-sv-primary uppercase">Goizez / Mañana</span>
+                        <span class="text-lg font-medium">08:30 - 13:30</span>
+                    </div>
+                    <div class="bg-white p-3 rounded-lg border border-gray-200">
+                        <span class="block text-xs font-bold text-sv-primary uppercase">Arratsaldez / Tarde</span>
+                        <span class="text-lg font-medium">15:00 - 17:30</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ADMINISTRACIÓN -->
+            <div class="bg-sv-light p-8 rounded-2xl border border-gray-100 flex flex-col items-center text-center hover:shadow-md transition relative group">
+                <!-- Botón de Email Flotante -->
+                <a href="mailto:svpadmin@sanvicenteirun.com" class="absolute top-4 right-4 bg-white p-2 rounded-full shadow-sm text-sv-accent-2 hover:bg-sv-accent-2 hover:text-white transition" title="Bidali mezua / Enviar mensaje">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                </a>
+
+                <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center text-sv-accent-2 mb-4 shadow-sm">
+                    <!-- Icono de Edificio/Institución -->
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-1">Administrazioa</h3>
+                <p class="text-sm text-gray-500 mb-6">Administración</p>
+                
+                <div class="space-y-3 w-full">
+                    <div class="bg-white p-3 rounded-lg border border-gray-200">
+                        <span class="block text-xs font-bold text-sv-accent-2 uppercase">Astelehenetik Ostegunera / L-J</span>
+                        <span class="text-lg font-medium">08:30 - 16:30</span>
+                    </div>
+                    <div class="bg-white p-3 rounded-lg border border-gray-200">
+                        <span class="block text-xs font-bold text-sv-accent-2 uppercase">Ostiraletan / Viernes</span>
+                        <span class="text-lg font-medium">08:30 - 14:30</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+</html>

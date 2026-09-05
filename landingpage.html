@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>San Vicente de Paúl - Hezkuntza Proiektua</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        svp: {
+                            dark: '#006D7B',   // Principal Teal
+                            medium: '#5FB3C5', // Light Blue
+                            green: '#95C11F',  // Green
+                            yellow: '#FDC300', // Yellow
+                            orange: '#F3953F', // Orange CTA
+                        }
+                    },
+                    fontFamily: {
+                        montserrat: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { font-family: 'Montserrat', sans-serif; }
+        html { scroll-behavior: smooth; }
+        
+        /* Animación Fade In Up del Header original */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translate3d(0, 40px, 0); }
+            to { opacity: 1; transform: translate3d(0, 0, 0); }
+        }
+        .animate-fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
+
+        /* --- ESTILOS DE ANIMACIONES DE TARJETAS --- */
+        .anim-container {
+            position: relative;
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+            background: transparent;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .anim-scaler {
+            transform: scale(0.55);
+            transform-origin: center center;
+            width: 340px;
+            height: 340px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* 1. MAPA */
+        .map-canvas { position: relative; width: 360px; height: 360px; }
+        .zoom-wrapper { width: 100%; height: 100%; position: relative; transform-origin: 265px 85px; will-change: transform; }
+        .zoom-wrapper.zooming { animation: camera-zoom 3s ease-out forwards; }
+        @keyframes camera-zoom { 0% { transform: scale(0.5); opacity: 0; } 10% { opacity: 1; } 100% { transform: scale(1.6); } }
+        .map-part { position: absolute; opacity: 0; transform: translate(var(--tx), var(--ty)) rotate(var(--r, 0deg)) scale(0.1); transition: opacity 1.2s ease-in-out, transform 1.2s ease-in-out; }
+        @keyframes assemble-map { 0% { opacity: 0; transform: translate(var(--tx), var(--ty)) rotate(var(--r, 0deg)) scale(0.1); } 60% { opacity: 1; transform: translate(0, 0) rotate(0deg) scale(1.05); } 100% { opacity: 1; transform: translate(0, 0) rotate(0deg) scale(1); } }
+        .map-part.animate { animation: assemble-map 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards; transition: none; }
+        .street { background-color: #01737E; z-index: 1; border-radius: 4px; }
+        .s-hor-1 { width: 100%; height: 40px; top: 140px; left: 0; }
+        .s-hor-2 { width: 100%; height: 25px; bottom: 60px; left: 0; opacity: 0.6; }
+        .s-ver-1 { width: 40px; height: 100%; top: 0; left: 160px; }
+        .s-ver-2 { width: 25px; height: 100%; top: 0; right: 60px; opacity: 0.6; }
+        .pin-head { width: 50px; height: 50px; background-color: #80C340; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); top: 60px; left: 240px; z-index: 3; box-shadow: 2px 4px 10px rgba(0,0,0,0.15); }
+        .pin-head.animate { animation: assemble-pin 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+        @keyframes assemble-pin { 0% { opacity: 0; transform: translate(var(--tx), var(--ty)) rotate(var(--r, 0deg)) scale(0.1); } 60% { opacity: 1; transform: translate(0, 0) rotate(-45deg) scale(1.2); } 100% { opacity: 1; transform: translate(0, 0) rotate(-45deg) scale(1); } }
+        .pin-dot { width: 18px; height: 18px; background-color: #FDC300; border-radius: 50%; top: 76px; left: 256px; z-index: 4; }
+
+        /* 2. APOYO */
+        .apoyo-canvas { position: relative; width: 340px; height: 400px; }
+        .apoyo-part { position: absolute; box-shadow: 4px 6px 15px rgba(0,0,0,0.2); opacity: 0; transform: translate(var(--tx), var(--ty)) rotate(var(--r, 0deg)) scale(0.2); transition: all 1.5s ease-in-out; will-change: transform, opacity; }
+        .apoyo-part.is-circle { width: 40px !important; height: 40px !important; border-radius: 50% !important; }
+        @keyframes assemble-apoyo { 0% { opacity: 0; transform: translate(var(--tx), var(--ty)) rotate(var(--r, 0deg)) scale(0.2); } 60% { opacity: 1; transform: translate(0, 0) rotate(0deg) scale(1.1); } 80% { transform: translate(0, 0) rotate(0deg) scale(0.95); } 100% { opacity: 1; transform: translate(0, 0) rotate(0deg) scale(1); } }
+        .apoyo-part.animate { animation: assemble-apoyo 1.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+        .ap-big { background-color: #95C11F; z-index: 2; }
+        .ap-big-head { width: 60px; height: 60px; border-radius: 50%; top: 80px; left: 180px; }
+        .ap-big-body { width: 90px; height: 140px; border-radius: 45px 45px 0 0; top: 145px; left: 165px; }
+        .ap-small { background-color: #5FB3C5; z-index: 3; }
+        .ap-small-head { width: 40px; height: 40px; border-radius: 50%; top: 160px; left: 110px; }
+        .ap-small-body { width: 60px; height: 80px; border-radius: 30px 30px 0 0; top: 205px; left: 100px; }
+        .ap-arm { background-color: #95C11F; width: 90px; height: 30px; border-radius: 15px; top: 195px; left: 120px; z-index: 1; transform: rotate(-20deg); }
+        .ap-arm.animate { animation: assemble-arm-apoyo 1.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+        @keyframes assemble-arm-apoyo { 0% { opacity: 0; transform: translate(var(--tx), var(--ty)) rotate(var(--r, 0deg)) scale(0.2); } 60% { opacity: 1; transform: translate(0, 0) rotate(-20deg) scale(1.1); } 80% { transform: translate(0, 0) rotate(-20deg) scale(0.95); } 100% { opacity: 1; transform: translate(0, 0) rotate(-20deg) scale(1); } }
+
+        /* 3. CRUZ */
+        .cruz-canvas { position: relative; width: 380px; height: 380px; }
+        .cruz-part { position: absolute; box-shadow: 4px 6px 20px rgba(0,0,0,0.2); border-radius: 12px; opacity: 0; transform: translate(var(--tx), var(--ty)) rotate(var(--r, 0deg)) scale(0.2); transition: all 1.5s ease-in-out; }
+        .cruz-part.is-circle { width: 50px !important; height: 50px !important; border-radius: 50% !important; }
+        @keyframes assemble-cruz { 0% { opacity: 0; transform: translate(var(--tx), var(--ty)) rotate(var(--r, 0deg)) scale(0.2); } 60% { opacity: 1; transform: translate(0, 0) rotate(0deg) scale(1.05); } 80% { transform: translate(0, 0) rotate(0deg) scale(0.95); } 100% { opacity: 1; transform: translate(0, 0) rotate(0deg) scale(1); } }
+        .cruz-part.animate { animation: assemble-cruz 1.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+        .cruz-vertical { background-color: #006D7B; width: 80px; height: 240px; top: 70px; left: 150px; z-index: 1; }
+        .cruz-horizontal { background-color: #006D7B; width: 240px; height: 80px; top: 150px; left: 70px; z-index: 2; }
+        .cruz-center { background-color: #FDC300; width: 44px; height: 44px; top: 168px; left: 168px; z-index: 3; border-radius: 8px; box-shadow: 0 0 25px rgba(253, 195, 0, 0.6); }
+        .cruz-halo { background-color: #95C11F; width: 140px; height: 140px; top: 120px; left: 120px; z-index: 0; border-radius: 50%; opacity: 0.3; }
+
+        /* 4. CRECER */
+        .growth-canvas { position: relative; width: 340px; height: 400px; }
+        .grow-part { position: absolute; box-shadow: 4px 6px 15px rgba(0,0,0,0.2); border-radius: 12px; opacity: 0; transform: translate(var(--tx), var(--ty)) rotate(var(--r, 0deg)) scale(0.2); transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out; }
+        @keyframes grow-elastic { 0% { opacity: 0; transform: translate(var(--tx), var(--ty)) rotate(var(--r, 0deg)) scale(0.2); } 60% { opacity: 1; transform: translate(0, 0) rotate(0deg) scale(1.1); } 80% { transform: translate(0, 0) rotate(0deg) scale(0.95); } 100% { opacity: 1; transform: translate(0, 0) rotate(0deg) scale(1); } }
+        .grow-part.animate { animation: grow-elastic 1.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; transition: none; }
+        .p-stem { width: 50px; height: 50px; background-color: #95C11F; left: 145px; z-index: 2; }
+        .stem-1 { bottom: 60px; border-radius: 8px 8px 20px 20px; }
+        .stem-2 { bottom: 115px; }
+        .stem-3 { bottom: 170px; }
+        .p-leaf { width: 50px; height: 50px; background-color: #5FB3C5; border-radius: 0 25px 0 25px; z-index: 1; }
+        .leaf-left { bottom: 120px; left: 90px; }
+        .leaf-right { bottom: 140px; left: 200px; border-radius: 25px 0 25px 0; }
+        .p-fruit { width: 70px; height: 70px; background-color: #FDC300; border-radius: 50%; bottom: 225px; left: 135px; z-index: 3; box-shadow: 0 0 30px rgba(253, 195, 0, 0.5); }
+        .p-fruit-core { width: 30px; height: 30px; background-color: #F3953F; border-radius: 50%; bottom: 245px; left: 155px; z-index: 4; }
+
+        /* 5. CÍRCULOS */
+        .circles-canvas { display: flex; margin-left: 50px; padding: 30px; overflow: visible; }
+        @keyframes converge { 0% { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(0.5); } 70% { opacity: 1; transform: translate(0, 0) scale(1.1); } 100% { opacity: 1; transform: translate(0, 0) scale(1); } }
+        .circle-part { width: 100px; height: 100px; border-radius: 50%; box-shadow: 0 4px 8px rgba(0,0,0,0.2); margin-left: -50px; opacity: 0; transform: translate(var(--tx), var(--ty)) scale(0.5); transition: opacity 2s ease-in-out, transform 2s ease-in-out; will-change: transform, opacity; }
+        .circle-part.animate { animation: converge 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; transition: none; }
+        .circle-part:nth-child(1) { background-color: #F4A261; }
+        .circle-part:nth-child(2) { background-color: #58A4B0; }
+        .circle-part:nth-child(3) { background-color: #FFC107; }
+        .circle-part:nth-child(4) { background-color: #8BC34A; }
+
+        /* 6. CONSTRUCCIÓN */
+        .cons-canvas { position: relative; width: 320px; height: 320px; }
+        .cons-block { position: absolute; width: 60px; height: 60px; box-shadow: 2px 4px 10px rgba(0,0,0,0.3); border-radius: 8px; opacity: 0; transform: translate(var(--tx), var(--ty)) rotate(var(--r, 0deg)) scale(0.5); transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out; }
+        @keyframes construct { 0% { opacity: 0; transform: translate(var(--tx), var(--ty)) rotate(var(--r, 0deg)) scale(0.5); } 60% { opacity: 1; transform: translate(0, 0) rotate(0deg) scale(1.05); } 80% { transform: translate(0, 0) rotate(0deg) scale(0.95); } 100% { opacity: 1; transform: translate(0, 0) rotate(0deg) scale(1); } }
+        .cons-block.animate { animation: construct 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards; transition: none; }
+        .b-1 { background-color: #5FB3C5; bottom: 40px; left: 70px; z-index: 1; }
+        .b-2 { background-color: #95C11F; bottom: 40px; left: 130px; z-index: 1; }
+        .b-3 { background-color: #FDC300; bottom: 40px; left: 190px; z-index: 1; }
+        .b-4 { background-color: #F3953F; bottom: 100px; left: 100px; z-index: 2; }
+        .b-5 { background-color: #5FB3C5; bottom: 100px; left: 160px; z-index: 2; }
+        .b-6 { background-color: #95C11F; bottom: 160px; left: 130px; z-index: 3; }
+        .b-sun { width: 50px; height: 50px; background-color: #FDC300; border-radius: 50%; top: 40px; right: 40px; box-shadow: 0 0 20px rgba(253, 195, 0, 0.4); z-index: 0; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen">
+
+    <div class="bg-svp-orange text-white py-4 px-4 shadow-md relative z-50">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="text-center md:text-left">
+                <p class="font-bold text-lg flex items-center justify-center md:justify-start gap-2">
+                    <i class="fas fa-bullhorn"></i> Matrikulazioa 2026-27 | Matriculación
+                </p>
+                <p class="text-sm md:text-base mt-1 font-medium opacity-95 leading-tight">
+                    Otsailak 2-13. Zatoz eskolara, matrikula egiten lagunduko dizugu!
+                    <span class="hidden md:inline mx-2">|</span>
+                    <br class="md:hidden">
+                    2-13 Febrero. Ven al colegio, ¡te ayudamos a hacer la matrícula!
+                </p>
+            </div>
+            <a href="https://sites.google.com/sanvicenteirun.com/web/hasiera/matrikulazioa-matr%C3%ADcula" 
+               target="_blank" 
+               class="whitespace-nowrap bg-white text-svp-orange hover:bg-svp-dark hover:text-white transition-colors duration-300 font-bold py-3 px-6 rounded-full shadow-sm text-sm md:text-base transform hover:scale-105 flex items-center gap-2">
+               <span>Informazio guztia / Toda la info</span>
+               <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+
+    <header id="proiektua" class="relative pt-20 pb-20 lg:pt-32 lg:pb-28 bg-svp-dark text-white overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full opacity-10">
+            <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                        <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" stroke-width="1"/>
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#grid)" />
+            </svg>
+        </div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-svp-yellow font-semibold text-lg md:text-xl tracking-wider uppercase mb-4 animate-fade-in-up">
+                Gure izateko era <span class="mx-2">|</span> Nuestra razón de ser
+            </h2>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 leading-tight">
+                Hezkuntza proiektua <br>
+                <span class="text-svp-medium">Proyecto educativo</span>
+            </h1>
+            
+            <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8 mt-12 text-left">
+                <div class="bg-white/10 p-6 rounded-lg backdrop-blur-sm border-l-4 border-svp-green">
+                    <p class="font-light text-lg leading-relaxed">
+                        San Vicente de Paúl ikastetxean pertsona erdigunean jartzen duen hezkuntza eredua sustatzen dugu. Gure proiektua bikaintasun akademikoa eta giza balioak uztartzean datza.
+                    </p>
+                </div>
+                <div class="bg-white/10 p-6 rounded-lg backdrop-blur-sm border-l-4 border-svp-yellow">
+                    <p class="font-light text-lg leading-relaxed">
+                        En el colegio San Vicente de Paúl promovemos un modelo educativo que pone a la persona en el centro. Nuestro proyecto consiste en unir la excelencia académica con los valores humanos.
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-12">
+                <a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ0yFPUzaxdU-woQaxGQETEvr58LceMCjHVsc87KyH3iVEJX6ivU7YnynA25mNgbwWz0X6RLWEAd" target="_blank" class="inline-block bg-svp-orange text-white text-lg font-bold px-10 py-4 rounded-full shadow-xl hover:bg-opacity-90 hover:scale-105 transition duration-300">
+                    Eskatu hitzordua | Pedir cita
+                </a>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none rotate-180">
+            <svg class="relative block w-[calc(100%+1.3px)] h-[50px] md:h-[100px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="#F3F4F6"></path>
+            </svg>
+        </div>
+    </header>
+
+    <section id="arrazoiak" class="py-20 bg-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col gap-16 max-w-3xl mx-auto">
+                <div class="bg-white rounded-2xl shadow-lg p-8 border-t-4 border-svp-dark scroll-trigger" data-anim="map">
+                    <div class="anim-container"><div class="anim-scaler"><div class="map-canvas"><div class="zoom-wrapper"><div class="map-part street s-hor-1"></div><div class="map-part street s-hor-2"></div><div class="map-part street s-ver-1"></div><div class="map-part street s-ver-2"></div><div class="map-part pin-head"></div><div class="map-part pin-dot"></div></div></div></div></div>
+                    <div class="text-center">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Etxe ondoan</h3>
+                        <h4 class="text-base uppercase tracking-wide text-svp-dark font-semibold mb-6">Al lado de casa</h4>
+                        <p class="text-gray-600 text-lg leading-relaxed mb-4">Ahaztu ibilbide luzeez. Irabazi bizi-kalitatea eta lasaitasuna eskola etxe ondoan edukita.</p>
+                        <p class="text-gray-500 text-base italic">Olvídate de las rutas largas. Gana tiempo y tranquilidad teniendo el colegio al lado de casa.</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl shadow-lg p-8 border-t-4 border-svp-medium scroll-trigger" data-anim="apoyo">
+                    <div class="anim-container"><div class="anim-scaler"><div class="apoyo-canvas"><div class="apoyo-part ap-arm" data-type="body"></div><div class="apoyo-part ap-big ap-big-head" data-type="head"></div><div class="apoyo-part ap-big ap-big-body" data-type="body"></div><div class="apoyo-part ap-small ap-small-head" data-type="head"></div><div class="apoyo-part ap-small ap-small-body" data-type="body"></div></div></div></div>
+                    <div class="text-center">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Laguntza pertsonalizatua</h3>
+                        <h4 class="text-base uppercase tracking-wide text-svp-medium font-semibold mb-6">Apoyo personalizado</h4>
+                        <p class="text-gray-600 text-lg leading-relaxed mb-4">Ez dugu errazena egiten, onena baizik. Laguntza pertsonalizatua lehen egunetik.</p>
+                        <p class="text-gray-500 text-base italic">No hacemos lo más fácil, hacemos lo mejor. Apoyo personalizado desde el primer día.</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl shadow-lg p-8 border-t-4 border-svp-green scroll-trigger" data-anim="cruz">
+                    <div class="anim-container"><div class="anim-scaler"><div class="cruz-canvas"><div class="cruz-part cruz-halo" data-delay="early"></div><div class="cruz-part cruz-vertical" data-delay="mid"></div><div class="cruz-part cruz-horizontal" data-delay="mid"></div><div class="cruz-part cruz-center" data-delay="last"></div></div></div></div>
+                    <div class="text-center">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Hezkuntza Bizentziarra</h3>
+                        <h4 class="text-base uppercase tracking-wide text-svp-green font-semibold mb-6">Educación Vicenciana</h4>
+                        <p class="text-gray-600 text-lg leading-relaxed mb-4">Pertsona solidarioak eta munduarentzat prestatuak hezten ditugu.</p>
+                        <p class="text-gray-500 text-base italic">Formamos personas solidarias y preparadas para el mundo.</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl shadow-lg p-8 border-t-4 border-svp-yellow scroll-trigger" data-anim="grow">
+                    <div class="anim-container"><div class="anim-scaler"><div class="growth-canvas"><div class="grow-part p-stem stem-1"></div><div class="grow-part p-stem stem-2"></div><div class="grow-part p-stem stem-3"></div><div class="grow-part p-leaf leaf-left" data-final-rot="-45"></div><div class="grow-part p-leaf leaf-right" data-final-rot="45"></div><div class="grow-part p-fruit"></div><div class="grow-part p-fruit-core"></div></div></div></div>
+                    <div class="text-center">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Haiekin batera hazten gara</h3>
+                        <h4 class="text-base uppercase tracking-wide text-svp-yellow font-semibold mb-6">Crecemos junto a ellos</h4>
+                        <p class="text-gray-600 text-lg leading-relaxed mb-4">Hezkuntza-proiektu bera 2 urtetik DBH 4. mailara arte.</p>
+                        <p class="text-gray-500 text-base italic">Un mismo proyecto educativo desde los 2 años hasta 4.º de la ESO.</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl shadow-lg p-8 border-t-4 border-svp-orange scroll-trigger" data-anim="circles">
+                    <div class="anim-container"><div class="anim-scaler"><div class="circles-canvas"><div class="circle-part"></div><div class="circle-part"></div><div class="circle-part"></div><div class="circle-part"></div></div></div></div>
+                    <div class="text-center">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Giro familiarra</h3>
+                        <h4 class="text-base uppercase tracking-wide text-svp-orange font-semibold mb-6">Ambiente familiar</h4>
+                        <p class="text-gray-600 text-lg leading-relaxed mb-4">Hasieratik giro familiarra. Ikasle bakoitzarekiko tratu hurbila.</p>
+                        <p class="text-gray-500 text-base italic">Ambiente familiar desde el primer día. Trato cercano con cada alumno.</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl shadow-lg p-8 border-t-4 border-svp-dark scroll-trigger" data-anim="cons">
+                    <div class="anim-container"><div class="anim-scaler"><div class="cons-canvas"><div class="cons-block b-1"></div><div class="cons-block b-2"></div><div class="cons-block b-3"></div><div class="cons-block b-4"></div><div class="cons-block b-5"></div><div class="cons-block b-6"></div><div class="cons-block b-sun"></div></div></div></div>
+                    <div class="text-center">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Zure egunerokora egokitzen</h3>
+                        <h4 class="text-base uppercase tracking-wide text-svp-dark font-semibold mb-6">Se adapta a tu día a día</h4>
+                        <p class="text-gray-600 text-lg leading-relaxed mb-4">Goiz Txokoa eta Jangela, lasaitasunerako.</p>
+                        <p class="text-gray-500 text-base italic">Aula matinal y comedor para tu tranquilidad.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="ardatzak" class="py-20 bg-svp-medium relative">
+        <div class="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-svp-green rounded-full opacity-20 blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 -mb-10 -ml-10 w-40 h-40 bg-svp-yellow rounded-full opacity-20 blur-3xl"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-white">Zeharkako ardatzak</h2>
+                <h3 class="text-xl md:text-2xl font-light mt-2 text-white/90">Ejes transversales</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
+                    <div class="text-5xl font-bold text-svp-dark mb-4 opacity-20">01</div>
+                    <h3 class="text-xl font-bold mb-1 text-svp-dark">Heldutasun teknologikoa</h3>
+                    <h4 class="text-sm font-semibold text-svp-medium mb-3 uppercase tracking-wide">Madurez tecnológica</h4>
+                    <p class="font-normal text-sm mb-2 text-gray-700">Ikasle digital arduratsuak hezten ditugu (Chromebook 1:1, Google Workspace).</p>
+                    <p class="font-light text-sm italic text-gray-500">Educamos alumnos digitales responsables.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
+                    <div class="text-5xl font-bold text-svp-dark mb-4 opacity-20">02</div>
+                    <h3 class="text-xl font-bold mb-1 text-svp-dark">Bizikidetza</h3>
+                    <h4 class="text-sm font-semibold text-svp-medium mb-3 uppercase tracking-wide">Convivencia</h4>
+                    <p class="font-normal text-sm mb-2 text-gray-700">Elkarrizketa eta errespetua oinarri dituen giro positiboa sustatzen dugu.</p>
+                    <p class="font-light text-sm italic text-gray-500">Fomentamos un clima positivo basado en el diálogo y el respeto.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
+                    <div class="text-5xl font-bold text-svp-dark mb-4 opacity-20">03</div>
+                    <h3 class="text-xl font-bold mb-1 text-svp-dark">Barne-begirada (IDAD)</h3>
+                    <h4 class="text-sm font-semibold text-svp-medium mb-3 uppercase tracking-wide">Interioridad (IDAD)</h4>
+                    <p class="font-normal text-sm mb-2 text-gray-700">Gure emozioak bateratuz, pertsonaren dimentsio guztiak indartzeko.</p>
+                    <p class="font-light text-sm italic text-gray-500">Armonizando nuestras emociones para potenciar todas las dimensiones de la persona.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
+                    <div class="text-5xl font-bold text-svp-dark mb-4 opacity-20">04</div>
+                    <h3 class="text-xl font-bold mb-1 text-svp-dark">Ikas komunitate</h3>
+                    <h4 class="text-sm font-semibold text-svp-medium mb-3 uppercase tracking-wide">Comunidades de aprendizaje</h4>
+                    <p class="font-normal text-sm mb-2 text-gray-700">Berdintasunean oinarritutako harremanak bultzatzen ditugu.</p>
+                    <p class="font-light text-sm italic text-gray-500">Impulsamos relaciones basadas en la igualdad.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="ate-irekiak" class="relative py-24 bg-svp-medium overflow-hidden">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-white opacity-10 rounded-full mix-blend-overlay blur-3xl -mr-16 -mt-16"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-svp-yellow opacity-20 rounded-full mix-blend-overlay blur-3xl -ml-20 -mb-20"></div>
+        <div class="relative max-w-4xl mx-auto px-4 text-center text-white">
+            <div class="inline-block bg-white text-svp-dark font-bold px-4 py-1 rounded-full mb-6 text-sm uppercase tracking-wider">
+                Sarrera librea / Entrada libre
+            </div>
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">Ate Irekiak <span class="text-svp-yellow">|</span> Puertas Abiertas</h2>
+            <div class="flex flex-col md:flex-row items-center justify-center gap-6 mt-12 mb-10">
+                <div class="bg-white/10 backdrop-blur-md border border-white/30 rounded-xl p-6 min-w-[200px]">
+                    <i class="far fa-calendar-alt text-4xl mb-3 text-svp-yellow"></i>
+                    <p class="text-2xl font-bold">Urtarrilak 31</p>
+                    <p class="text-lg opacity-80">31 de Enero</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md border border-white/30 rounded-xl p-6 min-w-[200px]">
+                    <i class="far fa-clock text-4xl mb-3 text-svp-yellow"></i>
+                    <p class="text-2xl font-bold">10:00etan</p>
+                    <p class="text-lg opacity-80">10:00h</p>
+                </div>
+            </div>
+
+            <div class="max-w-2xl mx-auto mb-12 text-center">
+                <div class="inline-flex flex-col md:flex-row gap-6 md:gap-12 justify-center items-center bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20">
+                    <div class="flex items-center">
+                        <i class="fas fa-info-circle text-svp-yellow text-2xl mr-3"></i>
+                        <div class="text-left">
+                            <p class="font-bold text-lg">Informazio saioa</p>
+                            <p class="text-sm opacity-80">Sesión informativa</p>
+                        </div>
+                    </div>
+                    <div class="hidden md:block w-px h-10 bg-white/30"></div>
+                    <div class="flex items-center">
+                        <i class="fas fa-shapes text-svp-yellow text-2xl mr-3"></i>
+                        <div class="text-left">
+                            <p class="font-bold text-lg">Familientzako tailerra</p>
+                            <p class="text-sm opacity-80">Taller para familias</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <p class="text-xl md:text-2xl font-light mb-6 leading-relaxed">
+                Eskaneatu eta erreserbatu zure bisita pertsonalizatua.
+                <br>
+                <span class="text-lg opacity-90 italic">Escanea y reserva tu visita personalizada.</span>
+            </p>
+
+            <div class="mb-10 flex justify-center">
+                <div class="bg-white p-4 rounded-xl shadow-lg">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhyKI6NsyS90JSnCWLJQzviM4IQm2ToeAsXRfcUUwyzqHyLSG-7hdoqB63oiqYi7PReQkUZKevJsg8QoFD3I8cvdQgy6knz_lxirhQIBIUzJtOx6o3L3o2xNnq7uW2vQH3nRddIRC550j9C2fA_WlJp9P7VvAR2PrpSHETPhE1PXoA9H8x_OaAneoqib3yj/s320/qr.png" 
+                        alt="QR Reserva Visita" 
+                        class="w-48 h-48 md:w-56 md:h-56 object-contain">
+                </div>
+            </div>
+
+            <a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ0yFPUzaxdU-woQaxGQETEvr58LceMCjHVsc87KyH3iVEJX6ivU7YnynA25mNgbwWz0X6RLWEAd" target="_blank" class="inline-flex items-center bg-white text-svp-dark text-lg font-bold px-10 py-5 rounded-full shadow-xl hover:bg-svp-yellow transition duration-300 transform hover:scale-105 group">
+                <i class="fas fa-qrcode mr-3 text-2xl group-hover:rotate-12 transition"></i>
+                Erreserbatu Orain / Reservar Ahora
+            </a>
+        </div>
+    </section>
+
+    <section id="kontaktua" class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-svp-dark mb-6">Zatoz gu ezagutzera!</h2>
+            <p class="text-xl text-gray-600 mb-8 font-light">
+                Ateak zabalik ditugu zuretzat. Etorri bisitan eta ezagutu gure hezkuntza proiektua bertatik bertara.
+                <br>
+                <span class="italic text-base mt-2 block">Tenemos las puertas abiertas para ti. Ven a visitarnos y conoce nuestro proyecto educativo de primera mano.</span>
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ0yFPUzaxdU-woQaxGQETEvr58LceMCjHVsc87KyH3iVEJX6ivU7YnynA25mNgbwWz0X6RLWEAd" target="_blank" class="bg-svp-orange text-white text-lg font-bold px-8 py-4 rounded-full shadow-lg hover:bg-opacity-90 hover:shadow-xl transition transform hover:-translate-y-1 inline-flex items-center justify-center">
+                    <i class="fas fa-calendar-check mr-2"></i> Eskatu Bisita / Solicitar Visita
+                </a>
+                <button class="bg-transparent border-2 border-svp-dark text-svp-dark text-lg font-semibold px-8 py-4 rounded-full hover:bg-svp-dark hover:text-white transition">
+                    <i class="fas fa-phone mr-2"></i> 943 61 99 90
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function setupAnimations() {
+            // MAPA
+            document.querySelectorAll('.map-part').forEach(part => {
+                const randomX = (Math.random() - 0.5) * 800;
+                const randomY = (Math.random() - 0.5) * 800;
+                const randomRot = (Math.random() - 0.5) * 360;
+                part.style.setProperty('--tx', `${randomX}px`);
+                part.style.setProperty('--ty', `${randomY}px`);
+                part.style.setProperty('--r', `${randomRot}deg`);
+                part.style.animationDelay = `${Math.random() * 0.5}s`;
+            });
+            // APOYO
+            document.querySelectorAll('.apoyo-part').forEach(part => {
+                const randomX = (Math.random() - 0.5) * 800;
+                const randomY = (Math.random() - 0.5) * 800;
+                const randomRot = (Math.random() - 0.5) * 360;
+                part.style.setProperty('--tx', `${randomX}px`);
+                part.style.setProperty('--ty', `${randomY}px`);
+                part.style.setProperty('--r', `${randomRot}deg`);
+                part.classList.add('is-circle');
+                if (part.dataset.type === 'head') { part.style.animationDelay = `${Math.random() * 0.3}s`; } 
+                else { part.style.animationDelay = `${0.8 + Math.random() * 0.4}s`; }
+            });
+            // CRUZ
+            document.querySelectorAll('.cruz-part').forEach(part => {
+                const randomX = (Math.random() - 0.5) * 800;
+                const randomY = (Math.random() - 0.5) * 800;
+                const randomRot = (Math.random() - 0.5) * 360;
+                part.style.setProperty('--tx', `${randomX}px`);
+                part.style.setProperty('--ty', `${randomY}px`);
+                part.style.setProperty('--r', `${randomRot}deg`);
+                part.classList.add('is-circle');
+                let baseDelay = 0;
+                const type = part.dataset.delay;
+                if(type === 'early') baseDelay = 0; if(type === 'mid') baseDelay = 0.4; if(type === 'last') baseDelay = 0.8;
+                part.style.animationDelay = `${baseDelay + Math.random() * 0.2}s`;
+            });
+            // CRECER
+            document.querySelectorAll('.grow-part').forEach(part => {
+                const randomX = (Math.random() - 0.5) * 600;
+                const randomY = 200 + Math.random() * 400;
+                const randomRot = (Math.random() - 0.5) * 180;
+                part.style.setProperty('--tx', `${randomX}px`);
+                part.style.setProperty('--ty', `${randomY}px`);
+                part.style.setProperty('--r', `${randomRot}deg`);
+                part.style.animationDelay = `${Math.random() * 0.3}s`;
+            });
+            // CÍRCULOS
+            document.querySelectorAll('.circle-part').forEach(part => {
+                const randomX = (Math.random() - 0.5) * 600;
+                const randomY = (Math.random() - 0.5) * 600;
+                part.style.setProperty('--tx', `${randomX}px`);
+                part.style.setProperty('--ty', `${randomY}px`);
+                part.style.animationDelay = `${Math.random() * 0.4}s`;
+            });
+            // CONSTRUCCIÓN
+            document.querySelectorAll('.cons-block').forEach(block => {
+                const randomX = (Math.random() - 0.5) * 800;
+                const randomY = (Math.random() - 0.5) * 800;
+                const randomRot = (Math.random() - 0.5) * 360;
+                block.style.setProperty('--tx', `${randomX}px`);
+                block.style.setProperty('--ty', `${randomY}px`);
+                block.style.setProperty('--r', `${randomRot}deg`);
+                block.style.animationDelay = `${Math.random() * 0.5}s`;
+            });
+        }
+
+        function playMap(c) { c.querySelector('.zoom-wrapper').classList.add('zooming'); c.querySelectorAll('.map-part').forEach(p => p.classList.add('animate')); }
+        function playApoyo(c) { c.querySelectorAll('.apoyo-part').forEach(p => { p.classList.remove('is-circle'); p.classList.add('animate'); }); }
+        function playCruz(c) { c.querySelectorAll('.cruz-part').forEach(p => { p.classList.remove('is-circle'); p.classList.add('animate'); }); }
+        function playGrow(c) { c.querySelectorAll('.grow-part').forEach(p => p.classList.add('animate')); }
+        function playCircles(c) { c.querySelectorAll('.circle-part').forEach(p => p.classList.add('animate')); }
+        function playCons(c) { c.querySelectorAll('.cons-block').forEach(p => p.classList.add('animate')); }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setupAnimations();
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const target = entry.target;
+                        const animType = target.dataset.anim;
+                        if (animType === 'map') playMap(target);
+                        if (animType === 'apoyo') playApoyo(target);
+                        if (animType === 'cruz') playCruz(target);
+                        if (animType === 'grow') playGrow(target);
+                        if (animType === 'circles') playCircles(target);
+                        if (animType === 'cons') playCons(target);
+                        observer.unobserve(target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            document.querySelectorAll('.scroll-trigger').forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>

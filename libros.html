@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testuliburuak | Libros de texto - San Vicente de Paúl</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'sv-primary': '#006D7B',      // Verde azulado oscuro
+                        'sv-accent-1': '#5FB3C5',     // Azul claro
+                        'sv-accent-2': '#95C11F',     // Verde lima
+                        'sv-accent-3': '#FDC300',     // Amarillo
+                        'sv-cta': '#F3953F',          // Naranja
+                        'sv-light': '#F9FAFB',        // Gris muy claro fondo
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { -webkit-font-smoothing: antialiased; }
+        /* Transiciones para las pestañas */
+        .tab-content { display: none; animation: fadeIn 0.4s ease-in-out; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Loader para iframe */
+        .iframe-container { background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="40" height="40"><circle cx="25" cy="25" r="20" fill="none" stroke="%23006D7B" stroke-width="4" stroke-dasharray="31.4 31.4" transform="rotate(0 25 25)"><animateTransform attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="1s" repeatCount="indefinite"/></circle></svg>') center center no-repeat; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen font-sans">
+
+    <header class="relative bg-sv-primary h-64 flex items-center justify-center overflow-hidden shadow-md">
+        <div class="absolute inset-0 opacity-25">
+            <img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="Libros escolares" class="w-full h-full object-cover">
+        </div>
+        
+        <div class="absolute inset-0 bg-sv-primary/60 mix-blend-multiply"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-sv-primary/90 via-transparent to-transparent"></div>
+
+        <div class="relative z-10 text-center px-4">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-2 drop-shadow-lg tracking-tight">Testuliburuak</h1>
+            <div class="w-24 h-1 bg-sv-accent-2 mx-auto my-3 rounded-full shadow-sm"></div>
+            <p class="text-white text-xl md:text-2xl font-medium tracking-wide opacity-95 drop-shadow-md">Libros de Texto</p>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full relative z-20 mb-10">
+
+        <div class="text-center max-w-3xl mx-auto mb-12">
+            <div class="inline-block p-3 bg-sv-light rounded-full mb-4 shadow-sm border border-gray-100">
+                <svg class="w-10 h-10 text-sv-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+            </div>
+            <p class="text-lg text-gray-800 font-medium mb-2">
+                Hemen kontsulta ditzakezu ikasturte honetako etapa bakoitzeko testuliburuen zerrendak.
+            </p>
+            <div class="w-16 h-px bg-gray-200 mx-auto my-4"></div>
+            <p class="text-gray-500 text-base italic">
+                Aquí puedes consultar los listados de libros de texto para cada etapa de este curso escolar.
+            </p>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
+            
+            <div class="grid grid-cols-1 sm:grid-cols-3 bg-gray-50 border-b border-gray-200">
+                <button onclick="switchTab('hh')" id="tab-hh" class="tab-btn px-6 py-5 text-center font-bold text-gray-500 hover:bg-white hover:text-sv-accent-1 transition-all border-b-4 border-transparent active-tab focus:outline-none">
+                    <span class="block text-lg">Haur Hezkuntza</span>
+                    <span class="block text-xs uppercase tracking-wider mt-1 opacity-70">Infantil (HH)</span>
+                </button>
+                
+                <button onclick="switchTab('lh')" id="tab-lh" class="tab-btn px-6 py-5 text-center font-bold text-gray-500 hover:bg-white hover:text-sv-accent-2 transition-all border-b-4 border-transparent focus:outline-none">
+                    <span class="block text-lg">Lehen Hezkuntza</span>
+                    <span class="block text-xs uppercase tracking-wider mt-1 opacity-70">Primaria (LH)</span>
+                </button>
+                
+                <button onclick="switchTab('dbh')" id="tab-dbh" class="tab-btn px-6 py-5 text-center font-bold text-gray-500 hover:bg-white hover:text-sv-cta transition-all border-b-4 border-transparent focus:outline-none">
+                    <span class="block text-lg">DBH</span>
+                    <span class="block text-xs uppercase tracking-wider mt-1 opacity-70">Secundaria (DBH)</span>
+                </button>
+            </div>
+
+            <div class="p-4 sm:p-8 bg-sv-light/30">
+                
+                <div id="content-hh" class="tab-content active">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-3 h-8 bg-sv-accent-1 rounded-full"></div>
+                        <h2 class="text-2xl font-bold text-sv-primary">HH Testuliburuak <span class="text-gray-400 font-normal text-lg ml-2">/ Libros Infantil</span></h2>
+                    </div>
+                    <div class="iframe-container w-full h-[600px] rounded-xl overflow-hidden border border-gray-200 shadow-inner bg-white">
+                        <iframe src="https://drive.google.com/embeddedfolderview?id=12glm6AH-_DKRF8T1koo1DngtSs6uQEma#list" class="w-full h-full border-0"></iframe>
+                    </div>
+                </div>
+
+                <div id="content-lh" class="tab-content">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-3 h-8 bg-sv-accent-2 rounded-full"></div>
+                        <h2 class="text-2xl font-bold text-sv-primary">LH Testuliburuak <span class="text-gray-400 font-normal text-lg ml-2">/ Libros Primaria</span></h2>
+                    </div>
+                    <div class="iframe-container w-full h-[600px] rounded-xl overflow-hidden border border-gray-200 shadow-inner bg-white">
+                        <iframe src="https://drive.google.com/embeddedfolderview?id=1VREYSrRGw9pf63k3_gsyR50GZ1OQss0i#list" class="w-full h-full border-0"></iframe>
+                    </div>
+                </div>
+
+                <div id="content-dbh" class="tab-content">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-3 h-8 bg-sv-cta rounded-full"></div>
+                        <h2 class="text-2xl font-bold text-sv-primary">DBH Testuliburuak <span class="text-gray-400 font-normal text-lg ml-2">/ Libros Secundaria</span></h2>
+                    </div>
+                    <div class="iframe-container w-full h-[600px] rounded-xl overflow-hidden border border-gray-200 shadow-inner bg-white">
+                        <iframe src="https://drive.google.com/embeddedfolderview?id=1qz77GQqnVtf1-LngYf2EDMICRzZxPj4S#list" class="w-full h-full border-0"></iframe>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // Configuración de colores activos para cada pestaña
+        const tabColors = {
+            'hh': 'border-sv-accent-1 text-sv-accent-1 bg-white',
+            'lh': 'border-sv-accent-2 text-sv-accent-2 bg-white',
+            'dbh': 'border-sv-cta text-sv-cta bg-white'
+        };
+
+        function switchTab(tabId) {
+            // 1. Ocultar todos los contenidos
+            document.querySelectorAll('.tab-content').forEach(el => {
+                el.classList.remove('active');
+            });
+            
+            // 2. Resetear el estilo de todos los botones
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                // Quitar todas las clases activas posibles
+                btn.className = "tab-btn px-6 py-5 text-center font-bold text-gray-500 hover:bg-white transition-all border-b-4 border-transparent focus:outline-none";
+                
+                // Restaurar los colores del hover según la etapa
+                if(btn.id === 'tab-hh') btn.classList.add('hover:text-sv-accent-1');
+                if(btn.id === 'tab-lh') btn.classList.add('hover:text-sv-accent-2');
+                if(btn.id === 'tab-dbh') btn.classList.add('hover:text-sv-cta');
+            });
+
+            // 3. Mostrar el contenido seleccionado
+            document.getElementById('content-' + tabId).classList.add('active');
+            
+            // 4. Aplicar estilo activo al botón seleccionado
+            const activeBtn = document.getElementById('tab-' + tabId);
+            const activeClasses = tabColors[tabId].split(' ');
+            activeBtn.classList.remove('text-gray-500', 'border-transparent');
+            activeBtn.classList.add(...activeClasses);
+        }
+
+        // Inicializar la primera pestaña al cargar la página
+        document.addEventListener('DOMContentLoaded', () => {
+            switchTab('hh');
+        });
+    </script>
+
+</body>
+</html>

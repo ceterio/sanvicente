@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ikas Komunitateak | Comunidades de Aprendizaje - San Vicente de Paúl</title>
+    
+    <!-- FUENTES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- ESTILOS (Tailwind) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'sv-primary': '#006D7B',      // Verde azulado oscuro
+                        'sv-accent-1': '#5FB3C5',     // Azul claro
+                        'sv-accent-2': '#95C11F',     // Verde lima
+                        'sv-accent-3': '#FDC300',     // Amarillo
+                        'sv-cta': '#F3953F',          // Naranja
+                        'sv-light': '#F9FAFB',        // Gris muy claro fondo
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { -webkit-font-smoothing: antialiased; }
+    </style>
+</head>
+<body class="bg-white text-gray-800 flex flex-col min-h-screen font-sans">
+
+    <!-- 1. HERO SECTION -->
+    <header class="relative bg-sv-primary h-64 flex items-center justify-center overflow-hidden shadow-md">
+        <!-- Imagen de fondo -->
+        <div class="absolute inset-0 opacity-30">
+            <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="Comunidades de Aprendizaje" class="w-full h-full object-cover">
+        </div>
+        
+        <!-- Capas de contraste -->
+        <div class="absolute inset-0 bg-sv-primary/60 mix-blend-multiply"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-sv-primary/90 via-transparent to-transparent"></div>
+
+        <!-- Contenido -->
+        <div class="relative z-10 text-center px-4">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-2 drop-shadow-lg tracking-tight">Ikas Komunitateak</h1>
+            <div class="w-24 h-1 bg-sv-accent-3 mx-auto my-3 rounded-full shadow-sm"></div>
+            <p class="text-white text-xl md:text-2xl font-medium tracking-wide opacity-95 drop-shadow-md">Comunidades de Aprendizaje</p>
+        </div>
+    </header>
+
+    <!-- 2. CONTENIDO PRINCIPAL -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-20 mb-10">
+
+        <!-- INTRO & OBJETIVOS -->
+        <div class="text-center max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-sv-primary mb-2">Amets egiten dugun eskola</h2>
+            <h3 class="text-xl font-normal text-gray-500 mb-8 uppercase tracking-wide">La escuela que soñamos</h3>
+            
+            <p class="text-gray-700 text-lg leading-relaxed mb-10">
+                Gizarte eta hezkuntza eraldaketara bideratutako proiektua gara. Komunitate osoaren parte-hartzean oinarritzen den ikaskuntza eredua.
+                <br><span class="text-sm italic text-gray-500 block mt-2">Somos un proyecto de transformación social y educativa. Un modelo de aprendizaje basado en la participación de toda la comunidad.</span>
+            </p>
+
+            <!-- Objetivos Cards -->
+            <div class="grid md:grid-cols-2 gap-6 text-left">
+                <div class="bg-sv-light p-6 rounded-xl border-l-4 border-sv-accent-2 shadow-sm hover:shadow-md transition-shadow">
+                    <h4 class="font-bold text-gray-900 mb-1 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-sv-accent-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+                        Ikaskuntza Hobetzea
+                    </h4>
+                    <p class="text-gray-600 text-sm">Ikasle <strong>GUZTIEN</strong> ikaskuntza prozesua eta emaitzak hobetzea.</p>
+                    <p class="text-gray-500 text-xs italic mt-1">Mejorar el aprendizaje de TODO el alumnado.</p>
+                </div>
+                <div class="bg-sv-light p-6 rounded-xl border-l-4 border-sv-cta shadow-sm hover:shadow-md transition-shadow">
+                    <h4 class="font-bold text-gray-900 mb-1 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-sv-cta" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        Bizikidetza Hobetzea
+                    </h4>
+                    <p class="text-gray-600 text-sm">Eskolako giroa eta harremanak aberastea.</p>
+                    <p class="text-gray-500 text-xs italic mt-1">Mejorar el ámbito convivencial.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ACCIONES DE ÉXITO (GRID PRINCIPAL) -->
+        <div>
+            <h3 class="text-2xl font-bold text-center text-gray-800 mb-10 relative inline-block left-1/2 transform -translate-x-1/2">
+                Hezkuntza Jarduera Arrakastatsuak
+                <span class="block text-base font-normal text-gray-500 mt-1">Acciones Educativas de Éxito</span>
+                <span class="absolute -bottom-3 left-0 w-full h-1 bg-gradient-to-r from-transparent via-sv-primary to-transparent"></span>
+            </h3>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- 1. Grupos Interactivos -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg border-t-4 border-sv-accent-1 hover:-translate-y-1 transition duration-300">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="bg-sv-accent-1/10 w-12 h-12 rounded-full flex items-center justify-center text-sv-accent-1 font-bold text-xl">1</div>
+                        <h3 class="text-xl font-bold text-gray-900">Talde Elkarreragileak <br><span class="text-sm font-normal text-gray-500">Grupos Interactivos</span></h3>
+                    </div>
+                    <p class="text-gray-700 text-sm mb-3">
+                        Ikasgelan boluntarioen laguntzarekin egindako talde txiki eta heterogeneoak. Jarduera ezberdinak txandakatzen dira dinamismoa mantentzeko.
+                    </p>
+                    <p class="text-gray-500 text-xs italic border-t border-gray-100 pt-2">
+                        Grupos heterogéneos dinamizados por adultos voluntarios. Se realizan actividades rotativas diseñadas por el profesorado para fomentar el diálogo y la solidaridad.
+                    </p>
+                </div>
+
+                <!-- 2. Tertulias Dialógicas -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg border-t-4 border-sv-accent-2 hover:-translate-y-1 transition duration-300">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="bg-sv-accent-2/10 w-12 h-12 rounded-full flex items-center justify-center text-sv-accent-2 font-bold text-xl">2</div>
+                        <h3 class="text-xl font-bold text-gray-900">Solasaldi Dialogikoak <br><span class="text-sm font-normal text-gray-500">Tertulias Dialógicas</span></h3>
+                    </div>
+                    <p class="text-gray-700 text-sm mb-3">
+                        Literatura klasikoaren inguruko hausnarketa kolektiboa. Berdintasunezko elkarrizketan oinarrituta, txanda errespetatuz eta norberaren interpretazioak partekatuz.
+                    </p>
+                    <p class="text-gray-500 text-xs italic border-t border-gray-100 pt-2">
+                        Reflexión colectiva sobre literatura, basada en el diálogo igualitario. Se acuerda una lectura y se comentan los párrafos elegidos por los participantes.
+                    </p>
+                </div>
+
+                <!-- 3. Formación Familias / Profes -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg border-t-4 border-sv-accent-3 hover:-translate-y-1 transition duration-300">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="bg-sv-accent-3/10 w-12 h-12 rounded-full flex items-center justify-center text-sv-accent-3 font-bold text-xl">3</div>
+                        <h3 class="text-xl font-bold text-gray-900">Prestakuntza Dialogikoa <br><span class="text-sm font-normal text-gray-500">Formación Dialógica</span></h3>
+                    </div>
+                    <p class="text-gray-700 text-sm mb-3">
+                        <strong>Irakasleak:</strong> Oinarri zientifikoa duten testuen inguruko tertuliak.<br>
+                        <strong>Familiak:</strong> Beharrei erantzuteko saioak.
+                    </p>
+                    <p class="text-gray-500 text-xs italic border-t border-gray-100 pt-2">
+                        Formación continua para profesorado (basada en evidencias científicas) y familias, respondiendo a las necesidades de la comunidad.
+                    </p>
+                </div>
+
+                <!-- 4. Comisiones Mixtas -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg border-t-4 border-sv-cta hover:-translate-y-1 transition duration-300">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="bg-sv-cta/10 w-12 h-12 rounded-full flex items-center justify-center text-sv-cta font-bold text-xl">4</div>
+                        <h3 class="text-xl font-bold text-gray-900">Batzorde Mistoak <br><span class="text-sm font-normal text-gray-500">Comisiones Mixtas</span></h3>
+                    </div>
+                    <p class="text-gray-700 text-sm mb-3">
+                        Familiek eta boluntarioek eskolako erabakietan parte hartzeko gunea. Eskola-bizitzako funtsezko gaietan eragiten dute.
+                    </p>
+                    <p class="text-gray-500 text-xs italic border-t border-gray-100 pt-2">
+                        Participación de familias y voluntarios en las decisiones escolares. Fortalece las redes de solidaridad y mejora el aprendizaje.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- IDEAS CLAVE (Del PDF) -->
+        <div class="bg-sv-light rounded-3xl p-10 border border-gray-200">
+            <h3 class="text-center text-2xl font-bold text-sv-primary mb-8">Gogoratzeko Ideiak / Ideas para Recordar</h3>
+            
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Idea 1 -->
+                <div class="flex items-start gap-3">
+                    <div class="mt-1 min-w-[20px] h-5 w-5 rounded-full bg-sv-primary/20 text-sv-primary flex items-center justify-center text-xs font-bold">✓</div>
+                    <div>
+                        <h4 class="font-bold text-gray-800 text-sm">Berdintasunezko elkarrizketa</h4>
+                        <p class="text-xs text-gray-500 mt-1">Indarra argudioetan dago, ez hierarkian. / La fuerza está en los argumentos.</p>
+                    </div>
+                </div>
+                <!-- Idea 2 -->
+                <div class="flex items-start gap-3">
+                    <div class="mt-1 min-w-[20px] h-5 w-5 rounded-full bg-sv-primary/20 text-sv-primary flex items-center justify-center text-xs font-bold">✓</div>
+                    <div>
+                        <h4 class="font-bold text-gray-800 text-sm">Adimen kulturala</h4>
+                        <p class="text-xs text-gray-500 mt-1">Pertsona guztiek dute gaitasuna. / Todas las personas tienen capacidad.</p>
+                    </div>
+                </div>
+                <!-- Idea 3 -->
+                <div class="flex items-start gap-3">
+                    <div class="mt-1 min-w-[20px] h-5 w-5 rounded-full bg-sv-primary/20 text-sv-primary flex items-center justify-center text-xs font-bold">✓</div>
+                    <div>
+                        <h4 class="font-bold text-gray-800 text-sm">Eraldaketa / Transformación</h4>
+                        <p class="text-xs text-gray-500 mt-1">Hezkuntza errealitatea aldatzeko tresna gisa.</p>
+                    </div>
+                </div>
+                <!-- Idea 4 -->
+                <div class="flex items-start gap-3">
+                    <div class="mt-1 min-w-[20px] h-5 w-5 rounded-full bg-sv-primary/20 text-sv-primary flex items-center justify-center text-xs font-bold">✓</div>
+                    <div>
+                        <h4 class="font-bold text-gray-800 text-sm">Elkartasuna / Solidaridad</h4>
+                        <p class="text-xs text-gray-500 mt-1">Komunitate osoaren parte-hartzea.</p>
+                    </div>
+                </div>
+                <!-- Idea 5 -->
+                <div class="flex items-start gap-3">
+                    <div class="mt-1 min-w-[20px] h-5 w-5 rounded-full bg-sv-primary/20 text-sv-primary flex items-center justify-center text-xs font-bold">✓</div>
+                    <div>
+                        <h4 class="font-bold text-gray-800 text-sm">Dimentsio instrumentala</h4>
+                        <p class="text-xs text-gray-500 mt-1">Funtsezko tresnak ikastea. / Aprendizaje instrumental.</p>
+                    </div>
+                </div>
+                <!-- Idea 6 -->
+                <div class="flex items-start gap-3">
+                    <div class="mt-1 min-w-[20px] h-5 w-5 rounded-full bg-sv-primary/20 text-sv-primary flex items-center justify-center text-xs font-bold">✓</div>
+                    <div>
+                        <h4 class="font-bold text-gray-800 text-sm">Zentzuaren sorkuntza</h4>
+                        <p class="text-xs text-gray-500 mt-1">Creación de sentido desde la interacción.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- INFO CIENTÍFICA (Footer de sección) -->
+        <div class="text-center text-xs text-gray-400 max-w-2xl mx-auto border-t border-gray-100 pt-6">
+            <p class="uppercase font-semibold tracking-wider mb-2">Oinarri Zientifikoak / Base Científica</p>
+            <p>
+                INCLUD-ED proiektuan eta Europako Batzordearen ikerketetan oinarritua (Framework Programme).
+                <br>
+                Basado en evidencias científicas del proyecto INCLUD-ED y la Comisión Europea.
+            </p>
+        </div>
+
+    </main>
+
+    <!-- (Sin Footer ni Nav) -->
+
+</body>
+</html>

@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azken Albisteak | Últimas Noticias - San Vicente de Paúl</title>
+    
+    <!-- FUENTES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- ESTILOS (Tailwind) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'sv-primary': '#006D7B',      // Verde azulado oscuro
+                        'sv-accent-1': '#5FB3C5',     // Azul claro
+                        'sv-accent-2': '#95C11F',     // Verde lima
+                        'sv-accent-3': '#FDC300',     // Amarillo
+                        'sv-cta': '#F3953F',          // Naranja
+                        'sv-light': '#F9FAFB',        // Gris muy claro fondo
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { -webkit-font-smoothing: antialiased; }
+        
+        /* Animaciones */
+        .fade-in { animation: fadeIn 0.5s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Loader */
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #006D7B;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 40px auto;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* Modal */
+        dialog::backdrop {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+        }
+        dialog[open] {
+            animation: zoomIn 0.3s ease-out;
+        }
+        @keyframes zoomIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800 flex flex-col min-h-screen font-sans">
+
+    <!-- 1. HERO SECTION -->
+    <header class="relative bg-sv-primary h-64 flex items-center justify-center overflow-hidden shadow-md">
+        <!-- Imagen de fondo -->
+        <div class="absolute inset-0 opacity-30">
+            <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="Noticias" class="w-full h-full object-cover">
+        </div>
+        
+        <!-- Capas de contraste -->
+        <div class="absolute inset-0 bg-sv-primary/60 mix-blend-multiply"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-sv-primary/90 via-transparent to-transparent"></div>
+
+        <!-- Contenido -->
+        <div class="relative z-10 text-center px-4">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-2 drop-shadow-lg tracking-tight">Azken Albisteak</h1>
+            <div class="w-24 h-1 bg-sv-accent-1 mx-auto my-3 rounded-full shadow-sm"></div>
+            <p class="text-white text-xl md:text-2xl font-medium tracking-wide opacity-95 drop-shadow-md">Últimas Noticias</p>
+        </div>
+    </header>
+
+    <!-- 2. CONTENIDO PRINCIPAL -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 mb-10">
+
+        <!-- Buscador / Filtro -->
+        <div class="mb-10 max-w-xl mx-auto">
+            <div class="relative">
+                <input type="text" id="search-input" placeholder="Bilatu albisteak... / Buscar noticias..." 
+                    class="w-full px-5 py-3 border border-gray-300 rounded-full shadow-sm focus:ring-2 focus:ring-sv-primary focus:border-transparent outline-none transition pl-12 bg-gray-50 focus:bg-white">
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contenedor de Noticias -->
+        <div id="news-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 min-h-[300px]">
+            <!-- El contenido se cargará aquí vía JS -->
+            <div class="col-span-full text-center">
+                <div class="loader"></div>
+                <p class="text-gray-500 animate-pulse">Albisteak kargatzen... / Cargando noticias...</p>
+            </div>
+        </div>
+
+        <!-- Mensaje de error / vacío -->
+        <div id="no-results" class="hidden text-center py-10">
+            <div class="inline-block p-4 bg-gray-100 rounded-full text-gray-400 mb-3">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <p class="text-gray-600">Ez da emaitzarik aurkitu. / No se han encontrado resultados.</p>
+        </div>
+
+    </main>
+
+    <!-- MODAL DETALLE -->
+    <dialog id="news-modal" class="rounded-xl shadow-2xl p-0 w-full max-w-3xl bg-white backdrop:bg-gray-900/50 open:animate-zoomIn z-50">
+        <div class="bg-sv-primary p-6 flex justify-between items-start text-white sticky top-0 z-10">
+            <div class="flex flex-col">
+                <span id="modal-date" class="text-xs font-bold uppercase tracking-wider opacity-80 bg-white/10 px-2 py-1 rounded w-fit mb-1"></span>
+                <span class="text-sm font-medium opacity-90">Albistearen xehetasunak / Detalles de la noticia</span>
+            </div>
+            <button onclick="closeModal()" class="text-white hover:text-sv-accent-3 transition bg-white/10 hover:bg-white/20 p-2 rounded-full"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+        </div>
+        
+        <div class="p-8 overflow-y-auto max-h-[80vh] modal-scroll">
+            
+            <!-- Imagen Principal -->
+            <img id="modal-img" class="w-full h-64 md:h-80 object-cover rounded-xl mb-8 shadow-md hidden" src="" alt="Imagen Noticia">
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Columna Euskera -->
+                <div class="space-y-4">
+                    <span class="inline-block px-3 py-1 bg-sv-light text-sv-primary text-xs font-bold rounded-full border border-sv-primary/20">EUSKARA</span>
+                    <h2 id="modal-title-eu" class="text-2xl font-bold text-gray-900 leading-tight"></h2>
+                    <div id="modal-body-eu" class="text-gray-600 leading-relaxed text-sm prose whitespace-pre-line"></div>
+                </div>
+
+                <!-- Columna Castellano -->
+                <div class="space-y-4 md:border-l md:border-gray-100 md:pl-8">
+                    <span class="inline-block px-3 py-1 bg-sv-light text-gray-500 text-xs font-bold rounded-full border border-gray-200">CASTELLANO</span>
+                    <h2 id="modal-title-es" class="text-2xl font-bold text-gray-900 leading-tight"></h2>
+                    <div id="modal-body-es" class="text-gray-600 leading-relaxed text-sm prose whitespace-pre-line"></div>
+                </div>
+            </div>
+
+            <!-- Botones Acción -->
+            <div class="flex flex-col sm:flex-row gap-4 pt-8 mt-8 border-t border-gray-100">
+                <a id="modal-link-btn" href="#" target="_blank" class="hidden flex-1 text-center bg-sv-primary text-white font-bold py-3 px-6 rounded-lg hover:bg-opacity-90 transition shadow-sm items-center justify-center gap-2 transform hover:-translate-y-0.5">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                    Ikusi gehiago / Ver más
+                </a>
+                <button onclick="shareNews()" class="flex-1 bg-white text-gray-700 border border-gray-300 font-bold py-3 px-6 rounded-lg hover:bg-gray-50 hover:text-sv-primary hover:border-sv-primary transition shadow-sm flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
+                    Elkarbanatu / Compartir
+                </button>
+            </div>
+        </div>
+    </dialog>
+
+    <script>
+        // --- CONFIGURACIÓN TSV ---
+        // IMPORTANTE: output=tsv para evitar errores con comas
+        const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRH7yAF9u3eguKbDSemxaDviakRJMDMGNxTSe6U86ZO8poS6wZAIpN3JJhSvOxTBnyYWeif1ZhY6x33/pub?output=tsv';
+
+        const grid = document.getElementById('news-grid');
+        const noResults = document.getElementById('no-results');
+        const searchInput = document.getElementById('search-input');
+        const modal = document.getElementById('news-modal');
+        
+        let allNews = [];
+        let currentNewsIndex = null;
+
+        // Mapa de meses para conversión de fecha
+        const monthMap = {
+            'URR': 9, 'OCT': 9, 'OCTUBRE': 9, 'OCTOBER': 9,
+            'AZA': 10, 'NOV': 10, 'NOVIEMBRE': 10, 'NOVEMBER': 10,
+            'ABE': 11, 'DIC': 11, 'DICIEMBRE': 11, 'DECEMBER': 11,
+            'URT': 0, 'ENE': 0, 'ENERO': 0, 'JANUARY': 0,
+            'OTS': 1, 'FEB': 1, 'FEBRERO': 1, 'FEBRUARY': 1,
+            'MAR': 2, 'MARZO': 2, 'MARCH': 2,
+            'API': 3, 'ABR': 3, 'ABRIL': 3, 'APRIL': 3,
+            'MAI': 4, 'MAY': 4, 'MAYO': 4,
+            'EKA': 5, 'JUN': 5, 'JUNIO': 5, 'JUNE': 5,
+            'UZT': 6, 'JUL': 6, 'JULIO': 6, 'JULY': 6,
+            'ABU': 7, 'AGO': 7, 'AGOSTO': 7, 'AUGUST': 7,
+            'IRA': 8, 'SEP': 8, 'SEPTIEMBRE': 8, 'SEPTEMBER': 8
+        };
+
+        // Carga Inicial
+        async function loadNews() {
+            try {
+                const response = await fetch(SHEET_URL);
+                if (!response.ok) {
+                    throw new Error(`Error HTTP: ${response.status}`);
+                }
+                
+                const data = await response.text();
+                
+                // Parseamos los datos con el nuevo parser TSV
+                let parsedNews = parseCSV(data);
+                
+                // Procesamos y filtramos
+                allNews = processNews(parsedNews);
+                
+                grid.innerHTML = ''; // Limpiar loader
+
+                if (allNews.length === 0) {
+                    showNoResults("Ez dago berririk momentuz. / No hay noticias por el momento.");
+                    return;
+                }
+
+                renderNews(allNews);
+
+            } catch (error) {
+                console.error("Fallo crítico al cargar noticias:", error);
+                grid.innerHTML = '';
+                showFallbackData(); // Datos de ejemplo si falla la red
+            }
+        }
+
+        // Procesa las noticias: Ordena por fecha y filtra antiguas (> 1 año)
+        function processNews(newsList) {
+            const today = new Date();
+            const oneYearAgo = new Date();
+            oneYearAgo.setFullYear(today.getFullYear() - 1);
+            oneYearAgo.setHours(0,0,0,0);
+
+            return newsList.map(news => {
+                let parts = news.curso ? news.curso.split('-') : [];
+                let year = parseInt(parts[0]);
+
+                if (isNaN(year)) year = today.getFullYear();
+                else if (year < 100) year += 2000;
+                
+                let mesStr = news.mes ? news.mes.split('/')[0].trim().toUpperCase() : 'ENE';
+                let monthIndex = monthMap[mesStr];
+                
+                if (typeof monthIndex === 'undefined') monthIndex = 0; 
+                
+                let day = parseInt(news.dia) || 1;
+
+                // Ajuste de año escolar
+                if (monthIndex < 8) { // Enero(0) a Agosto(7) -> año siguiente
+                   year = year + 1; 
+                }
+
+                const newsDate = new Date(year, monthIndex, day);
+                news.dateObject = newsDate;
+                return news;
+            })
+            .filter(news => !isNaN(news.dateObject))
+            .filter(news => news.dateObject >= oneYearAgo)
+            .sort((a, b) => b.dateObject - a.dateObject); // Ordenar descendente (Nueva primero)
+        }
+
+        function renderNews(newsList) {
+            grid.innerHTML = '';
+            
+            if (newsList.length === 0) {
+                noResults.classList.remove('hidden');
+                return;
+            } else {
+                noResults.classList.add('hidden');
+            }
+
+            newsList.forEach((news) => {
+                const html = createCardHTML(news);
+                grid.insertAdjacentHTML('beforeend', html);
+            });
+
+            // Re-asignar eventos de click a las tarjetas
+            const cards = grid.querySelectorAll('.group');
+            cards.forEach((card, index) => {
+                card.onclick = () => openModalWithItem(newsList[index]);
+            });
+        }
+
+        function createCardHTML(news) {
+            const imageSrc = (news.imagen && news.imagen.trim() !== '') 
+                ? news.imagen 
+                : 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'; 
+
+            return `
+            <div class="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col fade-in group cursor-pointer h-full" role="button" tabindex="0">
+                <div class="h-48 overflow-hidden relative flex-shrink-0">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60 z-10"></div>
+                    <img src="${imageSrc}" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-700" alt="${news.titulo_es}" onerror="this.src='https://placehold.co/800x600/006D7B/FFFFFF?text=San+Vicente'">
+                    <div class="absolute bottom-3 left-4 z-20">
+                        <span class="inline-block px-2 py-1 bg-sv-accent-1 text-white text-xs font-bold rounded uppercase tracking-wider shadow-sm backdrop-blur-sm bg-opacity-90">
+                            ${news.mes} ${news.dia}
+                        </span>
+                    </div>
+                </div>
+                <div class="p-6 flex-grow flex flex-col">
+                    <h3 class="text-lg font-bold text-sv-primary mb-2 line-clamp-2 leading-tight group-hover:text-sv-cta transition-colors">
+                        ${news.titulo_eu}
+                    </h3>
+                    <p class="text-sm text-gray-500 italic mb-3 line-clamp-1 border-l-2 border-gray-200 pl-2">
+                        ${news.titulo_es}
+                    </p>
+                    <p class="text-gray-600 text-sm mb-4 line-clamp-3 flex-grow">
+                        ${news.resumen_eu}
+                    </p>
+                    <div class="mt-auto pt-4 border-t border-gray-100 flex justify-between items-center">
+                        <span class="text-xs font-bold text-sv-accent-1 uppercase tracking-wide group-hover:underline">Gehiago irakurri</span>
+                        <svg class="w-5 h-5 text-gray-300 group-hover:text-sv-cta transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </div>
+                </div>
+            </div>`;
+        }
+
+        // CSV Parser MEJORADO (TSV)
+        function parseCSV(str) {
+            const rows = str.trim().split(/\r?\n/);
+            // slice(1) salta la cabecera
+            return rows.slice(1).map(row => {
+                // Separamos por TABULADOR (\t)
+                const cols = row.split('\t');
+
+                // Filtro de seguridad
+                if (cols.length < 2) return null;
+                
+                return {
+                    curso: cols[0] || '2024-25',
+                    mes: cols[1] || '',
+                    dia: cols[2] || '',
+                    titulo_eu: cols[3] || 'Albistea',
+                    resumen_eu: cols[4] || '',
+                    titulo_es: cols[5] || 'Noticia',
+                    resumen_es: cols[6] || '',
+                    enlace: cols[7] || '#',
+                    imagen: cols[8] || '' 
+                };
+            }).filter(n => n); // Eliminar nulls
+        }
+
+        // Búsqueda
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const filtered = allNews.filter(news => 
+                (news.titulo_eu && news.titulo_eu.toLowerCase().includes(term)) || 
+                (news.titulo_es && news.titulo_es.toLowerCase().includes(term)) ||
+                (news.resumen_eu && news.resumen_eu.toLowerCase().includes(term)) ||
+                (news.resumen_es && news.resumen_es.toLowerCase().includes(term))
+            );
+            renderNews(filtered);
+        });
+
+        // Fallback Demo Data
+        function showFallbackData() {
+            const demo = [
+                { curso: '2024-25', mes: 'OCT', dia: '28', titulo_eu: 'Berrikuntza Eguna (Demo)', titulo_es: 'Día de la Innovación (Demo)', resumen_eu: 'Ikasleek proiektu teknologikoak aurkeztu zituzten.', resumen_es: 'Los alumnos presentaron sus proyectos tecnológicos.', enlace: '#', imagen: '' },
+                { curso: '2024-25', mes: 'NOV', dia: '15', titulo_eu: 'Zientzia Astea (Demo)', titulo_es: 'Semana de la Ciencia (Demo)', resumen_eu: 'Zientziaren inguruko ekintza bereziak.', resumen_es: 'Actividades especiales sobre ciencia.', enlace: '#', imagen: '' }
+            ];
+            const processedDemo = processNews(demo);
+            renderNews(processedDemo);
+        }
+
+        // Modal Functions
+        window.openModalWithItem = function(news) {
+            if (!news) return;
+            
+            currentNewsIndex = allNews.indexOf(news); 
+
+            document.getElementById('modal-date').textContent = `${news.mes} ${news.dia}`;
+            document.getElementById('modal-title-eu').textContent = news.titulo_eu;
+            document.getElementById('modal-body-eu').textContent = news.resumen_eu;
+            document.getElementById('modal-title-es').textContent = news.titulo_es;
+            document.getElementById('modal-body-es').textContent = news.resumen_es;
+
+            const imgEl = document.getElementById('modal-img');
+            if (news.imagen && news.imagen.trim() !== '') {
+                imgEl.src = news.imagen;
+                imgEl.classList.remove('hidden');
+            } else {
+                imgEl.classList.add('hidden');
+            }
+
+            const linkBtn = document.getElementById('modal-link-btn');
+            if (news.enlace && news.enlace !== '#' && news.enlace.trim() !== '') {
+                linkBtn.href = news.enlace;
+                linkBtn.classList.remove('hidden');
+                linkBtn.classList.add('flex');
+            } else {
+                linkBtn.classList.add('hidden');
+                linkBtn.classList.remove('flex');
+            }
+
+            modal.showModal();
+            document.body.style.overflow = 'hidden';
+        }
+
+        window.closeModal = function() {
+            modal.close();
+            document.body.style.overflow = '';
+        }
+
+        window.shareNews = async function() {
+            const title = document.getElementById('modal-title-es').textContent;
+            
+            const shareData = {
+                title: title,
+                text: title,
+                url: window.location.href
+            };
+            if (navigator.share) {
+                try { await navigator.share(shareData); } catch(e) {}
+            } else {
+                alert("Kopiatu esteka hau: / Copia este enlace: " + shareData.url);
+            }
+        }
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+
+        function showNoResults(msg) {
+             noResults.querySelector('p').textContent = msg;
+             noResults.classList.remove('hidden');
+        }
+
+        // Iniciar
+        loadNews();
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario Escolar 2026-2027 - San Vicente ikastetxea Irún</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f4f7f8;
+        }
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+        }
+        .day {
+            transition: all 0.2s ease-in-out;
+            position: relative;
+            min-height: 2.25rem;
+        }
+        .day.has-event:hover {
+            transform: scale(1.1);
+            z-index: 20;
+        }
+        .day .tooltip {
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+            position: absolute;
+            bottom: 115%;
+            left: 50%;
+            transform: translateX(-50%) translateY(4px);
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 30;
+        }
+        .day.has-event:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        
+        /* San Vicente Irún Brand Event Colors */
+        .event-start-end { background-color: #95C11F; color: white; } /* Verde (Acento 2) */
+        .event-holiday { background-color: #006D7B; color: white; }   /* Verde Azulado Oscuro (Principal) */
+        .event-bridge { background-color: #FDC300; color: #1f2937; }    /* Amarillo (Acento 3) */
+        .event-carnival { background-color: #F3953F; color: white; }   /* Naranja (Acento 4 / CTA) */
+        .event-intensive { background-color: #e6f4f7; color: #006D7B; border: 1px solid #5FB3C5; } /* Verde Azulado Medio sutil */
+
+        .lang-btn.active {
+            background-color: #006D7B;
+            color: white;
+            font-weight: 600;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.12);
+        }
+
+        .legend-filter {
+            cursor: pointer;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+        .legend-filter:hover {
+            transform: translateY(-1px);
+        }
+        .legend-filter.dimmed {
+            opacity: 0.35;
+        }
+
+        .day.dimmed-day {
+            opacity: 0.25;
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-6 md:p-8 min-h-screen">
+
+    <div id="capture-area" class="max-w-7xl mx-auto bg-gray-100 p-4 sm:p-8 rounded-2xl shadow-sm">
+        <header class="mb-8 text-center">
+            <!-- San Vicente Irún Brand Header -->
+            <div class="flex flex-col items-center justify-center mb-5">
+                <img src="https://lh3.googleusercontent.com/sitesv/AICyYdZlsJ6rYBxNR0ThnFct5QotcVL4einPsqhsBDSm7-8YeX4yoe_q4v_PLuWfUH8M5rn8fKuc-_rGNww0PJwl21rtVoMYKfp50MD0fVEBUk7izJlaUMrTHoUKGAD96ioYkLLGaWvkKV_u2HvHZFvSwxR5v7GA3A6StXZa42JBFFdzYAjCpQ=w16383" 
+                     alt="San Vicente Irún" 
+                     class="h-16 md:h-20 object-contain mb-2"
+                     onerror="this.style.display='none'">
+                <a href="https://www.sanvicenteirun.com" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-[#006D7B] hover:underline tracking-widest uppercase">www.sanvicenteirun.com</a>
+            </div>
+
+            <h1 id="main-title" class="text-3xl md:text-4xl font-bold text-[#006D7B] tracking-tight">Calendario Escolar 2026-2027</h1>
+            <p id="main-subtitle" class="text-gray-600 mt-2 font-medium">Infografía interactiva del curso escolar</p>
+            
+            <div id="language-selector" class="mt-6 flex flex-wrap justify-center items-center gap-1.5 bg-gray-200/80 p-1.5 rounded-full w-max mx-auto border border-gray-300/50 shadow-inner">
+                <button data-lang="eu" class="lang-btn active px-3.5 py-1.5 text-xs sm:text-sm rounded-full transition-all duration-200">Euskara</button>
+                <button data-lang="es" class="lang-btn px-3.5 py-1.5 text-xs sm:text-sm rounded-full transition-all duration-200">Español</button>
+                <button data-lang="en" class="lang-btn px-3.5 py-1.5 text-xs sm:text-sm rounded-full transition-all duration-200">English</button>
+                <button data-lang="fr" class="lang-btn px-3.5 py-1.5 text-xs sm:text-sm rounded-full transition-all duration-200">Français</button>
+                <button data-lang="ar" class="lang-btn px-3.5 py-1.5 text-xs sm:text-sm rounded-full transition-all duration-200">العربية</button>
+                <button data-lang="ro" class="lang-btn px-3.5 py-1.5 text-xs sm:text-sm rounded-full transition-all duration-200">Română</button>
+                <button data-lang="uk" class="lang-btn px-3.5 py-1.5 text-xs sm:text-sm rounded-full transition-all duration-200">Українська</button>
+            </div>
+            
+            <div class="mt-6">
+                <button id="download-btn" class="bg-[#F3953F] hover:bg-[#e2832d] active:scale-95 text-white font-semibold px-6 py-2.5 rounded-full transition-all duration-200 shadow-md hover:shadow-lg flex items-center gap-2 mx-auto text-sm sm:text-base">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    <span>Descargar como Imagen</span>
+                </button>
+            </div>
+        </header>
+
+        <div id="legend" class="mb-8 p-5 bg-white rounded-xl shadow-sm border border-gray-100">
+            <div class="flex items-center justify-between mb-3">
+                <h2 id="legend-title" class="text-base font-bold text-[#006D7B]">Leyenda</h2>
+                <span id="legend-hint" class="text-xs text-gray-400 font-normal">Pulsa una categoría para filtrar</span>
+            </div>
+            <div class="flex flex-wrap gap-x-5 gap-y-3 text-xs sm:text-sm">
+                <div class="legend-filter flex items-center gap-2" data-type="start-end">
+                    <div class="w-4 h-4 rounded-full event-start-end shadow-sm"></div>
+                    <span data-key="start_end" class="font-medium text-gray-700">Inicio / Fin</span>
+                </div>
+                <div class="legend-filter flex items-center gap-2" data-type="intensive">
+                    <div class="w-4 h-4 rounded-full event-intensive shadow-sm"></div>
+                    <span data-key="intensive" class="font-medium text-gray-700">Horario intensivo</span>
+                </div>
+                <div class="legend-filter flex items-center gap-2" data-type="holiday">
+                    <div class="w-4 h-4 rounded-full event-holiday shadow-sm"></div>
+                    <span data-key="holiday" class="font-medium text-gray-700">Festivos / Oporrak</span>
+                </div>
+                <div class="legend-filter flex items-center gap-2" data-type="bridge">
+                    <div class="w-4 h-4 rounded-full event-bridge shadow-sm"></div>
+                    <span data-key="bridge" class="font-medium text-gray-700">Puentes</span>
+                </div>
+                <div class="legend-filter flex items-center gap-2" data-type="carnival">
+                    <div class="w-4 h-4 rounded-full event-carnival shadow-sm"></div>
+                    <span data-key="carnival" class="font-medium text-gray-700">Carnavales</span>
+                </div>
+            </div>
+        </div>
+
+        <main id="calendar-container" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+        </main>
+
+    </div>
+
+    <script>
+        // Función auxiliar para generar rangos de fechas
+        function createDateRange(startDateStr, endDateStr, type, description) {
+            const range = [];
+            const [sY, sM, sD] = startDateStr.split('-').map(Number);
+            const [eY, eM, eD] = endDateStr.split('-').map(Number);
+            let cur = new Date(sY, sM - 1, sD, 12, 0, 0);
+            const end = new Date(eY, eM - 1, eD, 12, 0, 0);
+            while (cur <= end) {
+                const y = cur.getFullYear();
+                const m = String(cur.getMonth() + 1).padStart(2, '0');
+                const d = String(cur.getDate()).padStart(2, '0');
+                range.push({
+                    date: `${y}-${m}-${d}`,
+                    type: type,
+                    description: description
+                });
+                cur.setDate(cur.getDate() + 1);
+            }
+            return range;
+        }
+
+        const calendarData = {
+            ui: {
+                main_title: { 
+                    eu: "2026-2027 Ikasturteko Egutegia", 
+                    es: "Calendario Escolar 2026-2027", 
+                    en: "School Calendar 2026-2027", 
+                    fr: "Calendrier Scolaire 2026-2027", 
+                    ar: "التقويم الدراسي 2026-2027", 
+                    ro: "Calendar Școlar 2026-2027", 
+                    uk: "Шкільний календар 2026-2027" 
+                },
+                main_subtitle: { 
+                    eu: "Ikasturtearen infografia interaktiboa", 
+                    es: "Infografía interactiva del curso escolar", 
+                    en: "Interactive academic calendar infographic", 
+                    fr: "Infographie interactive de l'année scolaire", 
+                    ar: "إنفوجرافيك تفاعلي للعام الدراسي", 
+                    ro: "Infografic interactiv al anului școlar", 
+                    uk: "Інтерактивна інфографіка навчального року" 
+                },
+                legend_title: { 
+                    eu: "Legenda", 
+                    es: "Leyenda", 
+                    en: "Legend", 
+                    fr: "Légende", 
+                    ar: "مفتاح الرموز", 
+                    ro: "Legendă", 
+                    uk: "Легенда" 
+                },
+                legend_hint: {
+                    eu: "Klikatu kategoria batean filtratzeko",
+                    es: "Pulsa una categoría para filtrar",
+                    en: "Click a category to filter",
+                    fr: "Cliquez sur une catégorie pour filtrer",
+                    ar: "انقر فوق فئة للتصفية",
+                    ro: "Faceți clic pe o categorie pentru a filtra",
+                    uk: "Натисніть категорію, щоб відфільтрувати"
+                },
+                download_button: { 
+                    eu: "Deskargatu irudi gisa", 
+                    es: "Descargar como Imagen", 
+                    en: "Download as Image", 
+                    fr: "Télécharger en image", 
+                    ar: "تنزيل كصورة", 
+                    ro: "Descărcați ca imagine", 
+                    uk: "Завантажити як зображення" 
+                },
+                downloading_text: {
+                    eu: "Sortzen...",
+                    es: "Generando...",
+                    en: "Generating...",
+                    fr: "Génération...",
+                    ar: "جاري الإنشاء...",
+                    ro: "Se generează...",
+                    uk: "Генерування..."
+                },
+                legend_items: {
+                    start_end: { eu: "Hasiera / Amaiera", es: "Inicio / Fin", en: "Start / End", fr: "Début / Fin", ar: "بداية / نهاية", ro: "Început / Sfârșit", uk: "Початок / Кінець" },
+                    intensive: { eu: "Ordutegi trinkoa", es: "Horario intensivo", en: "Intensive schedule", fr: "Horaire intensif", ar: "جدول مكثف", ro: "Program intensiv", uk: "Інтенсивний графік" },
+                    holiday: { eu: "Jaiak / Oporrak", es: "Festivos / Vacaciones", en: "Holidays", fr: "Jours fériés / Vacances", ar: "أيام عطلة", ro: "Sărbători / Vacanțe", uk: "Свята / Канікули" },
+                    bridge: { eu: "Zubiak", es: "Puentes", en: "Bridges", fr: "Ponts", ar: "جسر عطلة", ro: "Punți", uk: "Мости" },
+                    carnival: { eu: "Inauteriak", es: "Carnavales", en: "Carnival", fr: "Carnaval", ar: "كرنفال", ro: "Carnaval", uk: "Карнавал" }
+                },
+                months: {
+                    eu: ["Iraila", "Urria", "Azaroa", "Abendua", "Urtarrila", "Otsaila", "Martxoa", "Apirila", "Maiatza", "Ekaina"],
+                    es: ["Septiembre", "Octubre", "Noviembre", "Diciembre", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio"],
+                    en: ["September", "October", "November", "December", "January", "February", "March", "April", "May", "June"],
+                    fr: ["Septembre", "Octobre", "Novembre", "Décembre", "Janvier", "Février", "Mars", "Avril", "Mai", "Juin"],
+                    ar: ["سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر", "يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو"],
+                    ro: ["Septembrie", "Octombrie", "Noiembrie", "Decembrie", "Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie"],
+                    uk: ["Вересень", "Жовтень", "Листопад", "Грудень", "Січень", "Лютий", "Березень", "Квітень", "Травень", "Червень"]
+                },
+                days: {
+                    eu: ["Al", "Ar", "Az", "Og", "Or", "La", "Ig"],
+                    es: ["Lu", "Ma", "Mi", "Ju", "Vi", "Sá", "Do"],
+                    en: ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"],
+                    fr: ["Lu", "Ma", "Me", "Je", "Ve", "Sa", "Di"],
+                    ar: ["إث", "ث", "أر", "خ", "ج", "س", "أح"],
+                    ro: ["Lu", "Ma", "Mi", "Jo", "Vi", "Sâ", "Du"],
+                    uk: ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Нд"]
+                }
+            },
+
+            events: [
+                // Septiembre 2026: Inicio del curso el 9 de septiembre
+                { date: "2026-09-09", type: "start-end", description: { eu: "Ikasleekin lehen eguna / Ikasturtearen hasiera", es: "Primer día con el alumnado / Inicio del curso", en: "First day with students / School start", fr: "Premier jour avec les élèves / Rentrée", ar: "اليوم الأول للطلاب / بداية العام الدراسي", ro: "Prima zi cu elevii / Începutul cursului", uk: "Перший день з учнями / Початок навчання" } },
+                
+                // Intensivo de septiembre: 10 al 18 de septiembre (el 9 ya es inicio de curso)
+                ...createDateRange("2026-09-10", "2026-09-18", "intensive", {
+                    eu: "Ordutegi trinkoa", 
+                    es: "Horario intensivo", 
+                    en: "Intensive schedule", 
+                    fr: "Horaire intensif", 
+                    ar: "جدول مكثف", 
+                    ro: "Program intensiv", 
+                    uk: "Інтенсивний графік"
+                }),
+
+                // Octubre 2026: Fiesta Nacional (12 oct)
+                { date: "2026-10-12", type: "holiday", description: { eu: "Espainiako Jai Nazionala", es: "Fiesta Nacional de España", en: "National Day of Spain", fr: "Fête Nationale Espagnole", ar: "اليوم الوطني لإسبانيا", ro: "Ziua Națională a Spaniei", uk: "Національне свято Іспанії" } },
+
+                // Diciembre 2026: 7 de diciembre festivo (vacaciones de navidad) e Inmaculada (8 dic)
+                { 
+                    date: "2026-12-07", 
+                    type: "holiday", 
+                    description: { 
+                        eu: "Jai-eguna (Gabonetako oporrak)", 
+                        es: "Festivo (Vacaciones de Navidad)", 
+                        en: "Holiday (Christmas Holidays)", 
+                        fr: "Jour férié (Vacances de Noël)", 
+                        ar: "عطلة (عطلة عيد الميلاد)", 
+                        ro: "Sărbătoare (Vacanța de Crăciun)", 
+                        uk: "Свято (Різдвяні канікули)" 
+                    } 
+                },
+                { date: "2026-12-08", type: "holiday", description: { eu: "Ama Birjinaren Kontzepzioa", es: "Inmaculada Concepción", en: "Immaculate Conception", fr: "Immaculée Conception", ar: "عيد الحبل بلا دنس", ro: "Inmaculata Concepție", uk: "День Непорочного Зачаття" } },
+
+                // Vacaciones de Navidad (21 Dic 2026 - 7 Ene 2027 inclusive)
+                ...createDateRange("2026-12-21", "2027-01-07", "holiday", { 
+                    eu: "Gabonetako oporrak", 
+                    es: "Vacaciones de Navidad", 
+                    en: "Christmas Holidays", 
+                    fr: "Vacances de Noël", 
+                    ar: "عطلة عيد الميلاد", 
+                    ro: "Vacanța de Crăciun", 
+                    uk: "Різдвяні канікули" 
+                }),
+
+                // Enero 2027: Reinicio de clases el 8 de enero
+                { date: "2027-01-08", type: "start-end", description: { eu: "Klaseen berrehasiera", es: "Reinicio de clases", en: "Classes restart", fr: "Reprise des cours", ar: "استئناف الدراسة", ro: "Reînceperea cursurilor", uk: "Відновлення занять" } },
+
+                // Febrero 2027: Carnavales (8 y 9 de febrero)
+                { date: "2027-02-08", type: "carnival", description: { eu: "Inauteriak", es: "Carnavales", en: "Carnival", fr: "Carnaval", ar: "كرنفال", ro: "Carnaval", uk: "Карнавал" } },
+                { date: "2027-02-09", type: "carnival", description: { eu: "Inauteriak", es: "Carnavales", en: "Carnival", fr: "Carnaval", ar: "كرنفال", ro: "Carnaval", uk: "Карнавал" } },
+
+                // Vacaciones de Semana Santa: del 22 de marzo al 2 de abril de 2027 inclusive
+                ...createDateRange("2027-03-22", "2027-04-02", "holiday", { 
+                    eu: "Aste Santuko oporrak", 
+                    es: "Vacaciones de Semana Santa", 
+                    en: "Easter Holidays", 
+                    fr: "Vacances de Pâques", 
+                    ar: "عطلة عيد الفصح", 
+                    ro: "Vacanța de Paște", 
+                    uk: "Великодні канікули" 
+                }),
+
+                // Junio 2027: Horario Intensivo (1 al 20 de junio)
+                ...createDateRange("2027-06-01", "2027-06-20", "intensive", {
+                    eu: "Ordutegi trinkoa", 
+                    es: "Horario intensivo", 
+                    en: "Intensive schedule", 
+                    fr: "Horaire intensif", 
+                    ar: "جدول مكثف", 
+                    ro: "Program intensiv", 
+                    uk: "Інтенсивний графік"
+                }),
+
+                // 21 de junio: Último día de clase
+                { 
+                    date: "2027-06-21", 
+                    type: "start-end", 
+                    description: { 
+                        eu: "Azken eskola-eguna", 
+                        es: "Último día de clase", 
+                        en: "Last day of school", 
+                        fr: "Dernier jour de classe", 
+                        ar: "آخر يوم دراسي", 
+                        ro: "Ultima zi de școală", 
+                        uk: "Останній день навчання" 
+                    } 
+                }
+            ]
+        };
+
+        const calendarContainer = document.getElementById('calendar-container');
+        const languageSelector = document.getElementById('language-selector');
+        const downloadBtn = document.getElementById('download-btn');
+        let currentLang = 'eu';
+        let activeFilter = null;
+
+        function getEventForDate(date) {
+            return calendarData.events.find(event => event.date === date);
+        }
+
+        function renderCalendar(lang) {
+            document.getElementById('main-title').textContent = calendarData.ui.main_title[lang];
+            document.getElementById('main-subtitle').textContent = calendarData.ui.main_subtitle[lang];
+            document.getElementById('legend-title').textContent = calendarData.ui.legend_title[lang];
+            document.getElementById('legend-hint').textContent = calendarData.ui.legend_hint[lang];
+            
+            const downloadSpan = downloadBtn.querySelector('span');
+            if (downloadSpan) {
+                downloadSpan.textContent = calendarData.ui.download_button[lang];
+            }
+            
+            const legendSpans = document.querySelectorAll('#legend [data-key]');
+            legendSpans.forEach(span => {
+                const key = span.dataset.key;
+                if(calendarData.ui.legend_items[key]) {
+                    span.textContent = calendarData.ui.legend_items[key][lang];
+                }
+            });
+
+            calendarContainer.innerHTML = '';
+
+            // Renderizar los 10 meses desde Septiembre 2026 hasta Junio 2027
+            for (let i = 0; i < 10; i++) {
+                const monthIndex = (8 + i) % 12;
+                const year = (monthIndex < 8) ? 2027 : 2026;
+
+                const firstDayOfMonth = new Date(year, monthIndex, 1);
+                const daysInMonth = new Date(year, monthIndex + 1, 0).getDate();
+                let startingDay = firstDayOfMonth.getDay();
+                startingDay = startingDay === 0 ? 6 : startingDay - 1;
+
+                const monthDiv = document.createElement('div');
+                monthDiv.className = 'bg-white p-4 sm:p-5 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-200';
+
+                const monthName = calendarData.ui.months[lang][i];
+                monthDiv.innerHTML = `<h3 class="text-lg font-bold mb-4 text-center text-gray-800 tracking-wide">${monthName} ${year}</h3>`;
+
+                const dayHeaders = document.createElement('div');
+                dayHeaders.className = 'calendar-grid mb-2';
+                calendarData.ui.days[lang].forEach(day => {
+                    dayHeaders.innerHTML += `<div class="text-center font-bold text-xs text-gray-400 uppercase tracking-wider py-1">${day}</div>`;
+                });
+
+                const daysGrid = document.createElement('div');
+                daysGrid.className = 'calendar-grid';
+
+                for (let j = 0; j < startingDay; j++) {
+                    daysGrid.innerHTML += '<div class="day"></div>';
+                }
+
+                for (let day = 1; day <= daysInMonth; day++) {
+                    const currentDate = `${year}-${String(monthIndex + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                    const dayOfWeek = new Date(year, monthIndex, day).getDay();
+                    const isWeekend = (dayOfWeek === 0 || dayOfWeek === 6); // 0: Domingo, 6: Sábado
+                    
+                    // No marcar días de fin de semana como eventos
+                    const event = isWeekend ? null : getEventForDate(currentDate);
+                    
+                    let tooltipHTML = '';
+                    let dayClasses = 'day flex items-center justify-center h-9 w-9 text-sm rounded-full font-medium mx-auto transition-all ';
+
+                    const isDimmedByFilter = activeFilter && (!event || event.type !== activeFilter);
+
+                    if (event) {
+                        dayClasses += `has-event event-${event.type} cursor-pointer font-bold shadow-xs `;
+                        tooltipHTML = `<div class="tooltip p-2 text-xs bg-gray-900 text-white rounded-lg shadow-xl border border-gray-700">${event.description[lang]}</div>`;
+                    } else {
+                        if (isWeekend) {
+                           dayClasses += 'text-gray-300 bg-gray-50/50 ';
+                        } else {
+                           dayClasses += 'text-gray-700 hover:bg-gray-100 ';
+                        }
+                    }
+
+                    if (isDimmedByFilter) {
+                        dayClasses += 'dimmed-day ';
+                    }
+
+                    daysGrid.innerHTML += `<div class="${dayClasses}">${day}${tooltipHTML}</div>`;
+                }
+                
+                monthDiv.appendChild(dayHeaders);
+                monthDiv.appendChild(daysGrid);
+                calendarContainer.appendChild(monthDiv);
+            }
+        }
+
+        languageSelector.addEventListener('click', (e) => {
+            const btn = e.target.closest('.lang-btn');
+            if (btn) {
+                const lang = btn.dataset.lang;
+                if (lang && lang !== currentLang) {
+                    currentLang = lang;
+                    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    renderCalendar(currentLang);
+                }
+            }
+        });
+
+        document.querySelectorAll('.legend-filter').forEach(filterEl => {
+            filterEl.addEventListener('click', () => {
+                const type = filterEl.dataset.type;
+                if (activeFilter === type) {
+                    activeFilter = null;
+                    document.querySelectorAll('.legend-filter').forEach(f => f.classList.remove('dimmed'));
+                } else {
+                    activeFilter = type;
+                    document.querySelectorAll('.legend-filter').forEach(f => {
+                        if (f.dataset.type === type) {
+                            f.classList.remove('dimmed');
+                        } else {
+                            f.classList.add('dimmed');
+                        }
+                    });
+                }
+                renderCalendar(currentLang);
+            });
+        });
+
+        downloadBtn.addEventListener('click', () => {
+            const captureArea = document.getElementById('capture-area');
+            const downloadSpan = downloadBtn.querySelector('span');
+            const originalBtnText = downloadSpan ? downloadSpan.textContent : '';
+            
+            if (downloadSpan) {
+                downloadSpan.textContent = calendarData.ui.downloading_text[currentLang];
+            }
+            downloadBtn.disabled = true;
+
+            html2canvas(captureArea, {
+                scale: 2,
+                useCORS: true,
+                backgroundColor: '#f3f4f6'
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = `calendario-escolar-2026-2027-${currentLang}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+                
+                if (downloadSpan) {
+                    downloadSpan.textContent = originalBtnText;
+                }
+                downloadBtn.disabled = false;
+            }).catch(err => {
+                console.error('Error al generar la imagen:', err);
+                if (downloadSpan) {
+                    downloadSpan.textContent = originalBtnText;
+                }
+                downloadBtn.disabled = false;
+            });
+        });
+
+        // Renderizado inicial
+        renderCalendar(currentLang);
+    </script>
+</body>
+</html>

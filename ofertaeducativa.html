@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hezkuntza Eskaintza | Oferta Educativa - San Vicente de Paúl</title>
+    
+    <!-- FUENTES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- ESTILOS (Tailwind) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'sv-primary': '#006D7B',      // Verde azulado oscuro
+                        'sv-accent-1': '#5FB3C5',     // Azul claro
+                        'sv-accent-2': '#95C11F',     // Verde lima
+                        'sv-accent-3': '#FDC300',     // Amarillo
+                        'sv-cta': '#F3953F',          // Naranja
+                        'sv-light': '#F9FAFB',        // Gris muy claro fondo
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Montserrat', sans-serif; }
+        html { scroll-behavior: smooth; }
+        
+        /* Estilos para el Modal */
+        dialog::backdrop {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+        }
+        dialog[open] {
+            animation: zoomIn 0.3s ease-out;
+        }
+        @keyframes zoomIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        /* Scrollbar personalizado */
+        .modal-scroll::-webkit-scrollbar { width: 8px; }
+        .modal-scroll::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
+        .modal-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .modal-scroll::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="bg-white text-gray-800 flex flex-col min-h-screen">
+
+    <!-- 1. HERO SECTION -->
+    <header class="relative bg-sv-primary h-64 flex items-center justify-center overflow-hidden shadow-md">
+        <!-- Imagen de fondo con opacidad controlada -->
+        <div class="absolute inset-0 opacity-25">
+            <img src="https://cdn.pixabay.com/photo/2017/12/31/12/38/paper-3052246_1280.jpg" alt="Fondo Oferta Educativa" class="w-full h-full object-cover">
+        </div>
+        
+        <!-- Capas de contraste para legibilidad del texto -->
+        <div class="absolute inset-0 bg-sv-primary/60 mix-blend-multiply"></div>
+        <div class="absolute inset-0 bg-black/20"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-sv-primary/90 via-transparent to-transparent"></div>
+
+        <!-- Contenido del Banner -->
+        <div class="relative z-10 text-center px-4">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-2 drop-shadow-lg tracking-tight">Hezkuntza Eskaintza</h1>
+            <div class="w-24 h-1 bg-sv-accent-3 mx-auto my-3 rounded-full shadow-sm"></div>
+            <p class="text-white text-xl md:text-2xl font-medium tracking-wide opacity-95 drop-shadow-md">Oferta Educativa</p>
+        </div>
+    </header>
+
+    <!-- 2. NAVEGACIÓN RÁPIDA (Etapas) -->
+    <div class="relative -mt-10 z-20 px-4 mb-10">
+        <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Infantil -->
+            <div onclick="scrollToSection('infantil')" class="bg-white rounded-xl shadow-xl p-6 flex items-center gap-4 hover:-translate-y-2 transition duration-300 border-b-4 border-sv-accent-1 group cursor-pointer ring-1 ring-gray-100">
+                <div class="bg-sv-accent-1/10 p-3 rounded-full text-sv-accent-1 group-hover:bg-sv-accent-1 group-hover:text-white transition shadow-sm">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                </div>
+                <div class="text-center w-full">
+                    <span class="block font-bold text-gray-800 text-lg group-hover:text-sv-accent-1 transition">Haur Hezkuntza</span>
+                    <span class="block text-gray-600 font-medium text-base">Infantil</span>
+                    <span class="block text-xs text-gray-400 mt-1 uppercase tracking-wider font-semibold">2-6 Urte / Años</span>
+                </div>
+            </div>
+            <!-- Primaria -->
+            <div onclick="scrollToSection('primaria')" class="bg-white rounded-xl shadow-xl p-6 flex items-center gap-4 hover:-translate-y-2 transition duration-300 border-b-4 border-sv-accent-2 group cursor-pointer ring-1 ring-gray-100">
+                <div class="bg-sv-accent-2/10 p-3 rounded-full text-sv-accent-2 group-hover:bg-sv-accent-2 group-hover:text-white transition shadow-sm">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                </div>
+                <div class="text-center w-full">
+                    <span class="block font-bold text-gray-800 text-lg group-hover:text-sv-accent-2 transition">Lehen Hezkuntza</span>
+                    <span class="block text-gray-600 font-medium text-base">Primaria</span>
+                    <span class="block text-xs text-gray-400 mt-1 uppercase tracking-wider font-semibold">6-12 Urte / Años</span>
+                </div>
+            </div>
+            <!-- Secundaria -->
+            <div onclick="scrollToSection('secundaria')" class="bg-white rounded-xl shadow-xl p-6 flex items-center gap-4 hover:-translate-y-2 transition duration-300 border-b-4 border-sv-cta group cursor-pointer ring-1 ring-gray-100">
+                <div class="bg-sv-cta/10 p-3 rounded-full text-sv-cta group-hover:bg-sv-cta group-hover:text-white transition shadow-sm">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                </div>
+                <div class="text-center w-full">
+                    <span class="block font-bold text-gray-800 text-lg group-hover:text-sv-cta transition">DBH</span>
+                    <span class="block text-gray-600 font-medium text-base">Secundaria</span>
+                    <span class="block text-xs text-gray-400 mt-1 uppercase tracking-wider font-semibold">12-16 Urte / Años</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. CONTENIDO PRINCIPAL -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-32 mb-20">
+
+        <!-- INFANTIL -->
+        <section id="infantil" class="scroll-mt-32">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="relative group order-1 overflow-hidden rounded-2xl shadow-xl border-8 border-white">
+                    <div class="absolute -inset-4 bg-sv-accent-1/20 rounded-3xl transform -rotate-2 group-hover:rotate-0 transition-transform duration-500 -z-10"></div>
+                    <img src="https://images.unsplash.com/photo-1587654780291-39c9404d746b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Infantil" class="w-full h-auto object-cover transform transition duration-700 group-hover:scale-105">
+                </div>
+                <div class="order-2">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="h-1 w-8 bg-sv-accent-1 rounded-full"></span>
+                        <span class="text-sv-accent-1 font-bold text-sm uppercase tracking-wider">2-6 Urte / Años</span>
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-sv-primary mb-6">
+                        Haur Hezkuntza <span class="text-gray-300 font-light mx-2">/</span> <span class="text-gray-700">Educación Infantil</span>
+                    </h2>
+                    <div class="space-y-6 text-gray-600 leading-relaxed text-lg">
+                        <div class="p-6 bg-sv-light rounded-xl border-l-4 border-sv-accent-1 shadow-sm">
+                            <ul class="space-y-3 text-lg font-medium text-gray-700">
+                                <li class="flex items-center gap-2">
+                                    <svg class="w-5 h-5 text-sv-accent-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                    Experimentar.
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <svg class="w-5 h-5 text-sv-accent-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                    Despertar la curiosidad.
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <svg class="w-5 h-5 text-sv-accent-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                    Acompañar en el aprendizaje.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <button onclick="openStageModal('infantil')" class="mt-8 bg-sv-accent-1 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-opacity-90 transition transform hover:-translate-y-1 inline-flex items-center gap-2 group">
+                        <span>Ikusi xehetasunak</span> <span class="opacity-70 font-normal border-l border-white/30 pl-2 ml-1">Ver detalles</span>
+                        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRIMARIA -->
+        <section id="primaria" class="scroll-mt-32">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="order-2 md:order-1">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="h-1 w-8 bg-sv-accent-2 rounded-full"></span>
+                        <span class="text-sv-accent-2 font-bold text-sm uppercase tracking-wider">6-12 Urte / Años</span>
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-sv-primary mb-6">
+                        Lehen Hezkuntza <span class="text-gray-300 font-light mx-2">/</span> <span class="text-gray-700">Educación Primaria</span>
+                    </h2>
+                    <div class="space-y-6 text-gray-600 leading-relaxed text-lg">
+                        <div class="p-6 bg-sv-light rounded-xl border-l-4 border-sv-accent-2 shadow-sm">
+                            <ul class="space-y-3 text-lg font-medium text-gray-700">
+                                <li class="flex items-center gap-2">
+                                    <svg class="w-5 h-5 text-sv-accent-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                    Diseñar situaciones.
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <svg class="w-5 h-5 text-sv-accent-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                    Desarrollar las competencias.
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <svg class="w-5 h-5 text-sv-accent-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                    Afrontar los nuevos retos.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <button onclick="openStageModal('primaria')" class="mt-8 bg-sv-accent-2 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-opacity-90 transition transform hover:-translate-y-1 inline-flex items-center gap-2 group">
+                        <span>Ikusi xehetasunak</span> <span class="opacity-70 font-normal border-l border-white/30 pl-2 ml-1">Ver detalles</span>
+                        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                    </button>
+                </div>
+                <div class="relative group order-1 md:order-2 overflow-hidden rounded-2xl shadow-xl border-8 border-white">
+                    <div class="absolute -inset-4 bg-sv-accent-2/20 rounded-3xl transform rotate-2 group-hover:rotate-0 transition-transform duration-500 -z-10"></div>
+                    <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Primaria" class="w-full h-auto object-cover transform transition duration-700 group-hover:scale-105">
+                </div>
+            </div>
+        </section>
+
+        <!-- SECUNDARIA -->
+        <section id="secundaria" class="scroll-mt-32">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="relative group order-1 overflow-hidden rounded-2xl shadow-xl border-8 border-white">
+                    <div class="absolute -inset-4 bg-sv-cta/20 rounded-3xl transform -rotate-2 group-hover:rotate-0 transition-transform duration-500 -z-10"></div>
+                    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Secundaria" class="w-full h-auto object-cover transform transition duration-700 group-hover:scale-105">
+                </div>
+                <div class="order-2">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="h-1 w-8 bg-sv-cta rounded-full"></span>
+                        <span class="text-sv-cta font-bold text-sm uppercase tracking-wider">12-16 Urte / Años</span>
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-sv-primary mb-6">
+                        DBH <span class="text-gray-300 font-light mx-2">/</span> <span class="text-gray-700">Secundaria</span>
+                    </h2>
+                    <div class="space-y-6 text-gray-600 leading-relaxed text-lg">
+                        <div class="p-6 bg-sv-light rounded-xl border-l-4 border-sv-cta shadow-sm">
+                            <ul class="space-y-3 text-lg font-medium text-gray-700">
+                                <li class="flex items-center gap-2">
+                                    <svg class="w-5 h-5 text-sv-cta" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                    Construir aprendizajes.
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <svg class="w-5 h-5 text-sv-cta" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                    Conectar con el mundo más cercano.
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <svg class="w-5 h-5 text-sv-cta" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                    Impulsar el conocimiento profundo.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <button onclick="openStageModal('secundaria')" class="mt-8 bg-sv-cta text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-opacity-90 transition transform hover:-translate-y-1 inline-flex items-center gap-2 group">
+                        <span>Ikusi xehetasunak</span> <span class="opacity-70 font-normal border-l border-white/30 pl-2 ml-1">Ver detalles</span>
+                        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. NUEVA SECCIÓN: METODOLOGÍA -->
+        <section id="metodologia" class="scroll-mt-32">
+            <h2 class="text-3xl font-bold text-center text-sv-primary mb-12 flex flex-col items-center">
+                Gure Metodologia
+                <span class="text-xl font-normal text-gray-500 mt-2">Nuestra Metodología</span>
+                <span class="w-16 h-1 bg-sv-accent-3 mt-4 rounded-full"></span>
+            </h2>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- ABP -->
+                <div class="bg-white rounded-xl shadow-lg border border-gray-100 p-8 hover:shadow-2xl transition duration-300">
+                    <div class="w-14 h-14 bg-sv-accent-1/10 rounded-full flex items-center justify-center mb-6 text-sv-accent-1">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Aprendizaje Basado en Proyectos (ABP)</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                        Una metodología que permite a los alumnos adquirir conocimientos y competencias clave mediante la elaboración de proyectos que dan respuesta a problemas de la vida real.
+                    </p>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        El papel del estudiante es activo, participando en procesos cognitivos superiores como la comprensión, priorización y revisión crítica.
+                    </p>
+                </div>
+
+                <!-- Cooperativo -->
+                <div class="bg-white rounded-xl shadow-lg border border-gray-100 p-8 hover:shadow-2xl transition duration-300">
+                    <div class="w-14 h-14 bg-sv-accent-2/10 rounded-full flex items-center justify-center mb-6 text-sv-accent-2">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Aprendizaje Cooperativo</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                        Basado en estructurar la actividad del aula en equipos reducidos donde los estudiantes se ayudan mutuamente a aprender.
+                    </p>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Perseguimos una doble finalidad: aprender más y mejor los contenidos, y aprender a trabajar en equipo, convirtiéndonos en una "comunidad de aprendizaje".
+                    </p>
+                </div>
+
+                <!-- TIL -->
+                <div class="bg-white rounded-xl shadow-lg border border-gray-100 p-8 hover:shadow-2xl transition duration-300">
+                    <div class="w-14 h-14 bg-sv-cta/10 rounded-full flex items-center justify-center mb-6 text-sv-cta">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Tratamiento Integrado de Lenguas (TIL)</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                        Programación consensuada de las lenguas del currículo. Facilitamos la transferencia de aprendizajes entre lenguas basándonos en bases teóricas comunes.
+                    </p>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Trabajamos en cada lengua lo que le es propio y compartimos lo que tienen en común, siempre al servicio del buen uso de cada una.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 4. DIALOGS (MODALES DETALLADOS) -->
+    
+    <!-- INFANTIL MODAL -->
+    <dialog id="modal-infantil" class="rounded-xl shadow-2xl p-0 w-full max-w-4xl bg-white backdrop:bg-gray-900/50 open:animate-zoomIn z-50 h-[85vh]">
+        <div class="bg-sv-accent-1 p-6 flex justify-between items-center text-white sticky top-0 z-10 shadow-md">
+            <div>
+                <h2 class="text-2xl font-bold">Haur Hezkuntza / Infantil</h2>
+                <p class="text-white/80 text-sm">2 - 6 Urte / Años</p>
+            </div>
+            <button onclick="closeStageModal('infantil')" class="hover:bg-white/20 p-2 rounded-full transition"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+        </div>
+        <div class="p-8 overflow-y-auto h-full pb-20 modal-scroll">
+            <div class="space-y-10">
+                <!-- 2 Años -->
+                <div>
+                    <h3 class="text-xl font-bold text-sv-primary mb-4 border-b border-gray-200 pb-2">2 Urte / 2 Años</h3>
+                    <div class="bg-blue-50 p-6 rounded-xl border-l-4 border-sv-accent-1">
+                        <div class="mb-4">
+                            <h4 class="font-bold text-gray-900 mb-2 text-lg">Esperimentatzeko laguntza</h4>
+                            <p class="text-gray-800 leading-relaxed mb-2 font-medium">
+                                Haurrei beren ikaskuntza-prozesuan laguntzen diegu, modu indibidualean, bakoitzaren erritmoak eta familien beharrak errespetatuz.
+                            </p>
+                            <p class="text-gray-800 leading-relaxed">
+                                Egoera berriak esperimentatzen ditugu, material anitzak eskainiz eta autonomia zein jarduera aske eta kontzientea errazteko egoerak sortuz.
+                                <br>
+                                <span class="text-sv-primary font-bold block mt-1">"Etorkizuna bakoitzaren barruan dago."</span>
+                            </p>
+                        </div>
+                        <hr class="border-blue-200 my-4">
+                        <div>
+                            <h4 class="font-bold text-gray-600 mb-2 text-base">Acompañamiento para experimentar</h4>
+                            <p class="text-gray-600 leading-relaxed mb-2 text-sm">
+                                Acompañamos a los niños/as en su proceso de aprendizaje de manera individual, respetando los ritmos particulares y las necesidades de las familias.
+                            </p>
+                            <p class="text-gray-600 leading-relaxed text-sm">
+                                Experimentamos abriendo un nuevo abanico de situaciones, ofreciendo materiales diversos para facilitar la autonomía y la actividad libre y consciente.
+                                <br>
+                                <span class="text-sv-accent-1 font-semibold block mt-1">"El futuro está dentro de cada uno/a."</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3-4-5 Años -->
+                <div>
+                    <h3 class="text-xl font-bold text-sv-primary mb-4 border-b border-gray-200 pb-2">3 - 4 - 5 Urte / Años</h3>
+                    <div class="bg-gray-50 p-6 rounded-xl border-l-4 border-sv-accent-3">
+                        <div class="mb-4">
+                            <h4 class="font-bold text-gray-900 mb-2 text-lg">Aurkitzeko jakin-mina</h4>
+                            <p class="text-gray-800 leading-relaxed mb-2 font-medium">
+                                Eguneroko prozesuak eta ondoren etorriko direnak ezagutzeko jakin-mina pizten dugu. Oinarri sendoa bermatzen duten materialak aurkeztuz.
+                            </p>
+                            <p class="text-gray-800 leading-relaxed font-medium">
+                                Jarduera guztia <strong>euskaraz</strong> bideratzen da eta, bereziki, aurre-irakurketa eta idazketa prozesua.
+                            </p>
+                        </div>
+                        <hr class="border-gray-200 my-4">
+                        <div>
+                            <h4 class="font-bold text-gray-600 mb-2 text-base">Curiosidad para descubrir</h4>
+                            <p class="text-gray-600 leading-relaxed mb-2 text-sm">
+                                Despertamos la curiosidad para descubrir los procesos cotidianos y los que vendrán después. Presentando materiales que garantizan una base sólida.
+                            </p>
+                            <p class="text-gray-600 leading-relaxed text-sm">
+                                Toda la actividad se vehicula en <strong>euskara</strong> y, en especial, el proceso de pre-lectoescritura.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- PRIMARIA MODAL -->
+    <dialog id="modal-primaria" class="rounded-xl shadow-2xl p-0 w-full max-w-4xl bg-white backdrop:bg-gray-900/50 open:animate-zoomIn z-50 h-[85vh]">
+        <div class="bg-sv-accent-2 p-6 flex justify-between items-center text-white sticky top-0 z-10 shadow-md">
+            <div>
+                <h2 class="text-2xl font-bold">Lehen Hezkuntza / Primaria</h2>
+                <p class="text-white/80 text-sm">6 - 12 Urte / Años</p>
+            </div>
+            <button onclick="closeStageModal('primaria')" class="hover:bg-white/20 p-2 rounded-full transition"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+        </div>
+        <div class="p-8 overflow-y-auto h-full pb-20 modal-scroll">
+            <div class="space-y-8">
+                <!-- Introducción Bilingüe -->
+                <div class="prose max-w-none">
+                    <!-- Euskera -->
+                    <div class="mb-6">
+                        <p class="lead text-lg font-bold text-sv-primary mb-2">
+                            Ikastetxean diseinatutako programa propioak, kasu batzuetan esklusiboak.
+                        </p>
+                        <p class="text-gray-800 font-medium mb-2">
+                            6 eta 12 urte bitarteko etapa honetan, gure helburua da beharrezko <strong>konpetentziak ahalik eta gehien garatzea</strong>, aurre egin beharreko erronka berriei segurtasunez erantzuteko.
+                        </p>
+                        <p class="text-gray-800">
+                            Etapa osoan zehar garatutako programa didaktikoak, familia-eskola metodologia parte-hartzaileak, ikaskuntza eta ezagutzaren teknologiak... errealitate hurbilenetik <strong>aktiboki ikasteko</strong> planteatzen diren ekimenetako batzuk dira.
+                        </p>
+                    </div>
+                    
+                    <hr class="border-gray-100 my-6">
+
+                    <!-- Castellano -->
+                    <div class="text-gray-600 text-sm">
+                        <p class="font-semibold mb-2">
+                            Una serie de programas propios diseñados en el centro y, en algunos casos, exclusivos.
+                        </p>
+                        <p class="mb-2">
+                            En esta etapa, que comprende desde los 6 a los 12 años, nuestro objetivo es desarrollar al máximo las <strong>competencias necesarias</strong> para afrontar con seguridad los nuevos retos a los que nos enfrentamos.
+                        </p>
+                        <p>
+                            Programas didácticos desarrollados a lo largo de toda la etapa, metodologías participativas familia-escuela, tecnologías del aprendizaje y el conocimiento... son algunas de las iniciativas que se plantean para <strong>aprender activamente de la realidad más cercana.</strong>
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-4 mt-6">
+                    <div class="bg-green-50 p-4 rounded-lg border-l-4 border-sv-accent-2">
+                        <h4 class="font-bold text-gray-900">Kimu Proiektua</h4>
+                        <p class="text-gray-800 text-sm mt-1 mb-2">Egoera-arazoetan oinarritutako metodologia lehen ziklorako.</p>
+                        <p class="text-gray-500 text-xs italic">Metodología basada en situaciones problema para el primer ciclo.</p>
+                    </div>
+                    <div class="bg-green-50 p-4 rounded-lg border-l-4 border-sv-accent-2">
+                        <h4 class="font-bold text-gray-900">Digitalizazioa</h4>
+                        <p class="text-gray-800 text-sm mt-1 mb-2">Chromebook 1:1 gailuak eta Google Workspace ingurunea.</p>
+                        <p class="text-gray-500 text-xs italic">Uso de Chromebook 1:1 y entorno Google Workspace.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- SECUNDARIA MODAL -->
+    <dialog id="modal-secundaria" class="rounded-xl shadow-2xl p-0 w-full max-w-4xl bg-white backdrop:bg-gray-900/50 open:animate-zoomIn z-50 h-[85vh]">
+        <div class="bg-sv-cta p-6 flex justify-between items-center text-white sticky top-0 z-10 shadow-md">
+            <div>
+                <h2 class="text-2xl font-bold">DBH / Secundaria</h2>
+                <p class="text-white/80 text-sm">12 - 16 Urte / Años</p>
+            </div>
+            <button onclick="closeStageModal('secundaria')" class="hover:bg-white/20 p-2 rounded-full transition"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+        </div>
+        <div class="p-8 overflow-y-auto h-full pb-20 modal-scroll">
+            <div class="space-y-8">
+                <div class="bg-orange-50 p-6 rounded-xl border-l-4 border-sv-cta">
+                    <!-- Euskera -->
+                    <div class="mb-4">
+                        <h3 class="text-xl font-bold text-sv-primary mb-2">Munduarekin konektatutako ikaskuntzak eraiki</h3>
+                        <p class="text-gray-800 font-medium mb-2">
+                            Aukerak diseinatzen ditugu eta metodologia berriak ezartzen ditugu, <strong>ikaskuntza sakona</strong> lortzeko norberaren konpetentziak garatzeko.
+                        </p>
+                        <p class="text-gray-800">
+                            Ikasgelan proiektu espezifikoak garatzen ditugu, hizkuntza-konpetentzian, arazoen konponbidean, ikuspegi eta esperientzia pertsonaletan, eta ikaskuntza eta ezagutzaren teknologietan hezkuntza-erronkak inplikatzen dituztenak.
+                        </p>
+                    </div>
+                    
+                    <hr class="border-orange-200 my-4">
+
+                    <!-- Castellano -->
+                    <div class="text-gray-600 text-sm">
+                        <h3 class="text-lg font-bold text-gray-700 mb-2">Construir aprendizajes conectados con el mundo</h3>
+                        <p class="mb-2">
+                            Diseñamos oportunidades e implantamos nuevas metodologías para desarrollar las competencias individuales para un <strong>aprendizaje profundo</strong>.
+                        </p>
+                        <p>
+                            Desarrollamos proyectos específicos en el aula que implican retos educativos en la competencia lingüística, solución de problemas, visión y experiencias personales, tecnologías del aprendizaje y del conocimiento.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-white border border-gray-200 p-6 rounded-xl shadow-sm">
+                    <h3 class="text-lg font-bold text-gray-800 mb-2 flex items-center gap-2">
+                        <svg class="w-6 h-6 text-sv-cta" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/></svg>
+                        Hizkuntzak eta Ziurtagiriak <span class="text-gray-400 font-normal text-sm ml-2">/ Idiomas y Certificaciones</span>
+                    </h3>
+                    <p class="text-gray-800 font-medium mb-1">Hizkuntzen ikaskuntza bultzatzen dugu, etaparen amaieran aitorpen ofizialak lortzea erraztuz:</p>
+                    <p class="text-gray-500 text-sm mb-4 italic">Impulsamos el aprendizaje de idiomas facilitando la obtención de reconocimientos oficiales al final de la etapa:</p>
+                    
+                    <div class="flex flex-wrap gap-3">
+                        <span class="px-3 py-1 bg-sv-light text-sv-primary font-bold rounded-full border border-sv-primary/20">Euskara B1 / B2</span>
+                        <span class="px-3 py-1 bg-sv-light text-sv-cta font-bold rounded-full border border-sv-cta/20">Inglés FLYERS</span>
+                        <span class="px-3 py-1 bg-sv-light text-sv-cta font-bold rounded-full border border-sv-cta/20">Inglés KET</span>
+                        <span class="px-3 py-1 bg-sv-light text-sv-cta font-bold rounded-full border border-sv-cta/20">Inglés PET</span>
+                        <span class="px-3 py-1 bg-sv-light text-sv-cta font-bold rounded-full border border-sv-cta/20">Inglés FIRST</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </dialog>
+
+    <script>
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                // Scroll suave manual
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function openStageModal(stage) {
+            const modal = document.getElementById(`modal-${stage}`);
+            if (modal) {
+                modal.showModal();
+                document.body.style.overflow = 'hidden'; 
+            }
+        }
+
+        function closeStageModal(stage) {
+            const modal = document.getElementById(`modal-${stage}`);
+            if (modal) {
+                modal.close();
+                document.body.style.overflow = '';
+            }
+        }
+
+        document.querySelectorAll('dialog').forEach(dialog => {
+            dialog.addEventListener('click', (e) => {
+                if (e.target === dialog) {
+                    dialog.close();
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
