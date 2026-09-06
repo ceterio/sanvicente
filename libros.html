@@ -38,8 +38,7 @@
             from { opacity: 0; transform: translateY(5px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        /* Loader para iframe */
-        .iframe-container { background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="40" height="40"><circle cx="25" cy="25" r="20" fill="none" stroke="%23006D7B" stroke-width="4" stroke-dasharray="31.4 31.4" transform="rotate(0 25 25)"><animateTransform attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="1s" repeatCount="indefinite"/></circle></svg>') center center no-repeat; }
+        /* Hemos eliminado el loader personalizado del iframe para evitar la confusión visual */
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen font-sans">
@@ -100,7 +99,7 @@
                         <div class="w-3 h-8 bg-sv-accent-1 rounded-full"></div>
                         <h2 class="text-2xl font-bold text-sv-primary">HH Testuliburuak <span class="text-gray-400 font-normal text-lg ml-2">/ Libros Infantil</span></h2>
                     </div>
-                    <div class="iframe-container w-full h-[600px] rounded-xl overflow-hidden border border-gray-200 shadow-inner bg-white">
+                    <div class="w-full h-[600px] rounded-xl overflow-hidden border border-gray-200 shadow-inner bg-white">
                         <iframe src="https://drive.google.com/embeddedfolderview?id=12glm6AH-_DKRF8T1koo1DngtSs6uQEma#list" class="w-full h-full border-0"></iframe>
                     </div>
                 </div>
@@ -110,7 +109,7 @@
                         <div class="w-3 h-8 bg-sv-accent-2 rounded-full"></div>
                         <h2 class="text-2xl font-bold text-sv-primary">LH Testuliburuak <span class="text-gray-400 font-normal text-lg ml-2">/ Libros Primaria</span></h2>
                     </div>
-                    <div class="iframe-container w-full h-[600px] rounded-xl overflow-hidden border border-gray-200 shadow-inner bg-white">
+                    <div class="w-full h-[600px] rounded-xl overflow-hidden border border-gray-200 shadow-inner bg-white">
                         <iframe src="https://drive.google.com/embeddedfolderview?id=1VREYSrRGw9pf63k3_gsyR50GZ1OQss0i#list" class="w-full h-full border-0"></iframe>
                     </div>
                 </div>
@@ -120,7 +119,7 @@
                         <div class="w-3 h-8 bg-sv-cta rounded-full"></div>
                         <h2 class="text-2xl font-bold text-sv-primary">DBH Testuliburuak <span class="text-gray-400 font-normal text-lg ml-2">/ Libros Secundaria</span></h2>
                     </div>
-                    <div class="iframe-container w-full h-[600px] rounded-xl overflow-hidden border border-gray-200 shadow-inner bg-white">
+                    <div class="w-full h-[600px] rounded-xl overflow-hidden border border-gray-200 shadow-inner bg-white">
                         <iframe src="https://drive.google.com/embeddedfolderview?id=1qz77GQqnVtf1-LngYf2EDMICRzZxPj4S#list" class="w-full h-full border-0"></iframe>
                     </div>
                 </div>
